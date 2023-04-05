@@ -5,13 +5,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/constants.dart';
+import 'package:login_page/fill.dart';
 import 'package:login_page/login.dart';
 import 'package:login_page/paint/mainpaint.dart';
 import 'package:otp_text_field/otp_field.dart';
 
 class Otp extends StatefulWidget {
   const Otp({super.key, required this.telp, required this.password});
-  final String? telp;
+  final String telp;
   final String? password;
 
   @override
@@ -94,7 +95,7 @@ class _OtpState extends State<Otp> {
                                 Navigator.push(
                                   context, 
                                   MaterialPageRoute(
-                                    builder: (context) => Login()
+                                    builder: (context) => FillData(telp: widget.telp)
                                   ),
                                 )
                               } else {
@@ -140,12 +141,6 @@ class _OtpState extends State<Otp> {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(content: Text('Kode OTP terkirim'))
                                       ),
-                                      // Navigator.push(
-                                      //   context, 
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => Otp(telp: widget.telp, password: passwordController.text,)
-                                      //   ),
-                                      // )
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(content: Text(response.data['message']))

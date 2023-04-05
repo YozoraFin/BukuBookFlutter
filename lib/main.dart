@@ -39,7 +39,7 @@ class _LoadPageState extends State<LoadPage> {
       builder: (context, AsyncSnapshot<bool> snapshot) {
         if(snapshot.hasData) {
           if(snapshot.data ?? false) {
-            return const HomePage(data: '');
+            return const HomePage();
           }
           box.erase();
           return const Login();
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
       ),
-      home: const FillData(telp: ''),
+      home: const LoadPage(),
     );
   }
 }

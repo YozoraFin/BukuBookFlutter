@@ -1,8 +1,10 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:login_page/components/textform.dart';
 import 'package:login_page/constants.dart';
+import 'package:login_page/homepage.dart';
 import 'package:login_page/login.dart';
 import 'package:login_page/paint/scrollpaint.dart';
 
@@ -23,11 +25,18 @@ class _FillDataState extends State<FillData> {
   TextEditingController alamatController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
+  final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -60,24 +69,25 @@ class _FillDataState extends State<FillData> {
                           child: ElevatedButton(
                             onPressed: () {
                                 if(_formKey.currentState!.validate()) {
-                                    Dio().post('${Constants.baseUrl}/customer/fill', data: {'NoTelp': 'harusnotelp', 'NamaLengkap': namaLengkapController.text, 'NamaPanggilan': namaPanggilanController.text, 'Alamat': alamatController, 'Email': emailController})
-                                    .then((response) => {
-                                      if(response.data['status'] == 200) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(content: Text('Berhasil melengkapi profil'))
+                                  Dio().post('${Constants.baseUrl}/customer/fill', data: {'NoTelp': widget.telp, 'NamaLengkap': namaLengkapController.text, 'NamaPanggilan': namaPanggilanController.text, 'Alamat': alamatController.text, 'Email': emailController.text})
+                                  .then((response) => {
+                                    if(response.data['status'] == 200) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Berhasil melengkapi profil'))
+                                      ),
+                                      box.write('accesstoken', response.data['accesstoken']),
+                                      Navigator.push(
+                                        context, 
+                                        MaterialPageRoute(
+                                          builder: (context) => const HomePage()
                                         ),
-                                        Navigator.push(
-                                          context, 
-                                          MaterialPageRoute(
-                                            builder: (context) => const Login()
-                                          ),
-                                        )
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text(response.data['message']))
-                                        )
-                                      },
-                                    });
+                                      )
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(response.data['message']))
+                                      )
+                                    },
+                                  });
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(content: Text('Tolong lengkapi form'))

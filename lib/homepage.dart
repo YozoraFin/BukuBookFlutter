@@ -3,8 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:login_page/login.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.data});
-  final String data;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -16,8 +15,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Home Page'),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
       ),
       body: Column(
         children: [

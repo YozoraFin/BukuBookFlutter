@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/components/textform.dart';
+import 'package:login_page/fill.dart';
 import 'package:login_page/homepage.dart';
 import 'package:login_page/paint/mainpaint.dart';
 import 'package:login_page/register.dart';
@@ -41,6 +42,11 @@ class _LoginState extends State<Login> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
         resizeToAvoidBottomInset: false,
         body: Form(
           key: _formKey,
@@ -90,16 +96,26 @@ class _LoginState extends State<Login> {
                             Dio().post('${Constants.baseUrl}/customer/login', data: {'NoTelp': telpController.text, 'Password': passwordController.text})
                             .then((response) => {
                               if(response.data['status'] == 200) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Login berhasil')),
-                                ),
-                                box.write('accesstoken', response.data['accesstoken']),
-                                Navigator.push(
-                                  context, 
-                                  MaterialPageRoute(
-                                    builder: (context) => const HomePage(data: '',)
+                                print(response.data),
+                                if(response.data['data'] == true) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Login berhasil')),
                                   ),
-                                )
+                                  box.write('accesstoken', response.data['accesstoken']),
+                                  Navigator.push(
+                                    context, 
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage()
+                                    ),
+                                  )
+                                } else {
+                                  Navigator.push(
+                                    context, 
+                                    MaterialPageRoute(
+                                      builder: (context) => FillData(telp: telpController.text)
+                                    ),
+                                  )
+                                }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('Login gagal'))
