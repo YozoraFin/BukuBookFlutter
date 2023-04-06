@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/constants.dart';
 import 'package:login_page/fill.dart';
 import 'package:login_page/homepage.dart';
@@ -39,7 +40,7 @@ class _LoadPageState extends State<LoadPage> {
       builder: (context, AsyncSnapshot<bool> snapshot) {
         if(snapshot.hasData) {
           if(snapshot.data ?? false) {
-            return const HomePage();
+            return BottomNavbar();
           }
           box.erase();
           return const Login();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BottomPaint extends CustomPainter {
+class BannerPaint extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
@@ -8,11 +8,11 @@ class BottomPaint extends CustomPainter {
     paint.style = PaintingStyle.fill;
 
     var path = Path();
-    path.moveTo(0, size.height*0.95);
-    path.quadraticBezierTo(size.width*0.8, size.height*0.8, size.width, size.height*0.95);
-    path.lineTo(size.width, size.height);
+    path.moveTo(0, 0);
     path.lineTo(0, size.height);
-    
+    path.lineTo(size.width*0.4, size.height);
+    path.lineTo(size.width*0.4, 0);
+
     canvas.drawPath(path, paint);
   }
 
