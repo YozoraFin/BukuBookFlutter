@@ -12,7 +12,6 @@ class HomeBanner extends StatefulWidget {
 }
 
 class _HomeBannerState extends State<HomeBanner> {
-  List<int> list = [1, 2, 3, 4, 5];
   List _bannerData = [];
 
   @override
@@ -33,9 +32,11 @@ class _HomeBannerState extends State<HomeBanner> {
     return CarouselSlider(
       options: CarouselOptions(
         viewportFraction: 1.0,
-        autoPlay: true
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 5)
       ),
-      items: _bannerData.map((item) => 
+      items: 
+      _bannerData.map((item) => 
         Container(
           color: const Color.fromARGB(0, 241, 246, 247),
           child: Row(
@@ -43,7 +44,11 @@ class _HomeBannerState extends State<HomeBanner> {
               Center(
                 child: CachedNetworkImage(
                   imageUrl: item['SrcBanner'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                  progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+                  progressIndicatorBuilder: (context, url, downloadProgress) => Container(
+                    child: Center(
+                      child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
+                    ),
+                  ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
