@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/constants.dart';
-import 'package:login_page/fill.dart';
-import 'package:login_page/homepage.dart';
-import 'package:login_page/otp.dart';
+import 'package:login_page/register.dart';
 import 'package:login_page/splash.dart';
 import 'login.dart';
 

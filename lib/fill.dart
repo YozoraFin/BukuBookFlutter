@@ -2,10 +2,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/components/textform.dart';
 import 'package:login_page/constants.dart';
-import 'package:login_page/homepage.dart';
-import 'package:login_page/login.dart';
 import 'package:login_page/paint/scrollpaint.dart';
 
 class FillData extends StatefulWidget {
@@ -79,7 +78,7 @@ class _FillDataState extends State<FillData> {
                                       Navigator.push(
                                         context, 
                                         MaterialPageRoute(
-                                          builder: (context) => const HomePage()
+                                          builder: (context) => BottomNavbar()
                                         ),
                                       )
                                     } else {

@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/components/textform.dart';
 import 'package:login_page/fill.dart';
-import 'package:login_page/homepage.dart';
 import 'package:login_page/paint/mainpaint.dart';
 import 'package:login_page/register.dart';
 import 'constants.dart';
@@ -105,7 +105,7 @@ class _LoginState extends State<Login> {
                                   Navigator.push(
                                     context, 
                                     MaterialPageRoute(
-                                      builder: (context) => const HomePage()
+                                      builder: (context) => BottomNavbar()
                                     ),
                                   )
                                 } else {

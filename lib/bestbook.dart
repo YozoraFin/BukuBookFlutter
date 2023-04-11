@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
+import 'package:login_page/detailbook.dart';
 
 class BestBook extends StatefulWidget {
   const BestBook({super.key});
@@ -60,30 +61,37 @@ class _BestBookState extends State<BestBook> {
                   enableInfiniteScroll: false
                 ),
                 items: _bestBook.map((e) => 
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: CachedNetworkImage(
-                          imageUrl: e['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                          progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                            child: Center(
-                              child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                        builder: (context) => DetailBook(id: e['id'] ?? '')
+                      ));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: CachedNetworkImage(
+                            imageUrl: e['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
+                            progressIndicatorBuilder: (context, url, downloadProgress) => Container(
+                              child: Center(
+                                child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
+                              ),
                             ),
-                          ),
-                          errorWidget: (context, url, error) => const Icon(Icons.error),
-                          width: 150,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        )
-                      ),
-                      const SizedBox(height: 10,),
-                      Text(e['Penulis'], style: const TextStyle(color: Color(0xFF384AEB)), textAlign: TextAlign.center,),
-                      const SizedBox(height: 10,),
-                      Text(e['Judul'], style: const TextStyle(fontSize: 15), textAlign: TextAlign.center,),
-                      const SizedBox(height: 10,),
-                      Text('Rp ${idr.format(e["Harga"])}', style: const TextStyle(color: Color(0xFF384AEB)), textAlign: TextAlign.center,)     
-                    ],
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
+                            width: 150,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          )
+                        ),
+                        const SizedBox(height: 10,),
+                        Text(e['Penulis'], style: const TextStyle(color: Color(0xFF384AEB)), textAlign: TextAlign.center,),
+                        const SizedBox(height: 10,),
+                        Text(e['Judul'], style: const TextStyle(fontSize: 15), textAlign: TextAlign.center,),
+                        const SizedBox(height: 10,),
+                        Text('Rp ${idr.format(e["Harga"])}', style: const TextStyle(color: Color(0xFF384AEB)), textAlign: TextAlign.center,)     
+                      ],
+                    ),
                   ),
                 ).toList(),
               ),
