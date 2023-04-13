@@ -5,27 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:login_page/constants.dart';
 
 class HomeBanner extends StatefulWidget {
-  const HomeBanner({super.key});
+  const HomeBanner({super.key, required this.bannerData});
+  final List bannerData;
 
   @override
   State<HomeBanner> createState() => _HomeBannerState();
 }
 
 class _HomeBannerState extends State<HomeBanner> {
-  List _bannerData = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getBanner();
-  }
-
-  getBanner() async{
-    Response response = await Dio().get('${Constants.baseUrl}/banner');
-    setState(() {
-      _bannerData = response.data['data'];
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +23,7 @@ class _HomeBannerState extends State<HomeBanner> {
         autoPlayInterval: const Duration(seconds: 5)
       ),
       items: 
-      _bannerData.map((item) => 
+      widget.bannerData.map((item) => 
         Container(
           color: const Color.fromARGB(0, 241, 246, 247),
           child: Row(

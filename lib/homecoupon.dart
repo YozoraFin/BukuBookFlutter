@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:login_page/constants.dart';
 
 class HomeCoupon extends StatefulWidget {
-  const HomeCoupon({super.key});
+  const HomeCoupon({super.key, required this.coupon});
+  final Map<String, dynamic> coupon;
 
   @override
   State<HomeCoupon> createState() => _HomeCouponState();

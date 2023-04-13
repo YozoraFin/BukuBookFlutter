@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
 import 'package:login_page/detailbook.dart';
+import 'package:skeletons/skeletons.dart';
 
 class BestBook extends StatefulWidget {
-  const BestBook({super.key});
+  const BestBook({super.key, required this.bestBook, required this.loading});
+  final List bestBook;
+  final bool loading;
 
   @override
   State<BestBook> createState() => _BestBookState();
@@ -15,23 +18,6 @@ class BestBook extends StatefulWidget {
 
 class _BestBookState extends State<BestBook> {
   final NumberFormat idr = NumberFormat('#,##0', 'id');
-  List _bestBook = [];
-  bool _loading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    getBook();
-  }
-
-  getBook() async{
-    Dio().get('${Constants.baseUrl}/buku/best').then((value) {
-      setState(() {
-        _bestBook = value.data['data'];
-        _loading = false;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +46,44 @@ class _BestBookState extends State<BestBook> {
                   enlargeCenterPage: true,
                   enableInfiniteScroll: false
                 ),
-                items: _bestBook.map((e) => 
+                items: widget.loading 
+                ? ({for(var i = 0; i < 8; i++) Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 150,
+                        height: 200,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 70,
+                        height: 12,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 140,
+                        height: 12,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 90,
+                        height: 12,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                  ],
+                )}).toList()
+                : widget.bestBook.map((e) => 
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(

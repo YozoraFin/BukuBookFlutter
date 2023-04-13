@@ -6,9 +6,12 @@ import 'package:login_page/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/detailbook.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:skeletons/skeletons.dart';
 
 class PopularBook extends StatefulWidget {
-  const PopularBook({super.key});
+  const PopularBook({super.key, required this.popularBook, required this.loading});
+  final List popularBook;
+  final bool loading;
 
   @override
   State<PopularBook> createState() => _PopularBookState();
@@ -16,23 +19,6 @@ class PopularBook extends StatefulWidget {
 
 class _PopularBookState extends State<PopularBook> {
   final NumberFormat idr = NumberFormat('#,##0', 'id');
-  List _popularBook = [];
-  bool _loading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    getBook();
-  }
-
-  getBook() async{
-    Dio().get('${Constants.baseUrl}/buku/rekomended').then((value) {
-      setState(() {
-        _popularBook = value.data['data'];
-        _loading = false;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +47,44 @@ class _PopularBookState extends State<PopularBook> {
                   enlargeCenterPage: true,
                   enableInfiniteScroll: false
                 ),
-                items: _popularBook.map((e) => 
+                items: widget.loading 
+                ? ({for(var i = 0; i < 8; i++) Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 150,
+                        height: 200,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 70,
+                        height: 12,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 140,
+                        height: 12,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 90,
+                        height: 12,
+                        alignment: Alignment.center
+                      ),
+                    ),
+                  ],
+                )}).toList()
+                : widget.popularBook.map((e) => 
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(

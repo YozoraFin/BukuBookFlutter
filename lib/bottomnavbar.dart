@@ -1,15 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/articlelist.dart';
 import 'package:login_page/homepage.dart';
 import 'package:login_page/login.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class BottomNavbar extends StatelessWidget {
-  BottomNavbar({super.key});
+  const BottomNavbar({
+    this.initial = 0,
+    this.kategori = '',
+    Key? key
+  }):super(key: key);
+  
+  final String kategori;
+  final int initial;
+
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      const Login()
+      ArticleList(sKategori: kategori,),
+      const Login(),
     ];
   }
 
@@ -23,22 +33,28 @@ class BottomNavbar extends StatelessWidget {
       ),
       
       PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.news),
+        title: 'Artikel',
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.inactiveGray
+      ),
+      
+      PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.person),
         title: 'Akun',
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.inactiveGray
-      )
+      ),
     ];
   }
 
 
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       context, 
-      controller: _controller,
+      controller: PersistentTabController(initialIndex: initial),
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,

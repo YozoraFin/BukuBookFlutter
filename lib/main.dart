@@ -38,10 +38,11 @@ class _LoadPageState extends State<LoadPage> {
       builder: (context, AsyncSnapshot<bool> snapshot) {
         if(snapshot.hasData) {
           if(snapshot.data ?? false) {
-            return BottomNavbar();
+            return BottomNavbar(initial: 0,);
+          } else {
+            box.erase();
+            return const Login();
           }
-          box.erase();
-          return const Login();
         }
         return const SplashScreenBukuBook();
       },
