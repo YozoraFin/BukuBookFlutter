@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/constants.dart';
+import 'package:login_page/couponlist.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class HomeCoupon extends StatefulWidget {
   const HomeCoupon({super.key, required this.coupon});
@@ -56,9 +58,9 @@ class _HomeCouponState extends State<HomeCoupon> {
                 const SizedBox(height: 10,),
                 ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('WIP')),
-                    );
+                    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                      builder: (context) => CouponList()
+                    ));
                   }, 
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

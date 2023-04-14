@@ -1,0 +1,93 @@
+Tanda: 
+√ = Selesai
+- = Belum selesai
++ = Sedang progress
+X = Belum ada progress
+
+1. Keseluruhan
+-   ~> Menambahkan bottom navbar 
+-   ~> Menambahkan Custom Paint
+√   ~> Menambahkan cache untuk gambar
+-   ~> Menambahkan smart refresh untuk setiap halaman
+-   ~> Menambahkan skeleton untuk setiap halaman
+
+2. Login
+√   ~> Styling 
+√   ~> Toggle password 
+√   ~> Handle password salah 
+√   ~> Navigasi ke register 
+√   ~> User login 
+√   ~> Handle user dengan data kurang lengkap 
+X   ~> Login menggunakan OTP (Tunggu semua basenya selesai)
+-------
+
+3. Register
+√   ~> Styling 
+√   ~> Menambahkan OTP setelah memasukkan Telp & Password 
+X   ~> Menambahkan verifikasi password
+√   ~> Memindahkan TextField informasi setelah OTP 
+√   ~> Navigasi ke login 
+-------
+
+4. OTP
+√   ~> Styling
+√   ~> Mengirim OTP ketika masuk ke halaman OTP
+√   ~> Menambahkan tombol untuk kirim ulang OTP
+√   ~> Menambahkan user ke DB setelah Verifikasi OTP 
+
+5. HomePage
+√   ~> Styling
+√   ~> Menambahkan banner
+√   ~> Menambahkan buku terlaris dan populer
+√   ~> Navigasi ke detail buku
+√   ~> Menambahkan highlight kupon
+√   ~> Navigasi ke daftar kupon
+√   ~> Menambahkan artikel terbaru
+√   ~> Menambahkan carousel kecuali kupon
+-------
+
+6. Artikel
+    -> Detail
+√       ~> Styling
+√       ~> Menghapus bottom navbar
+√       ~> Menampilkan artikel lainnya
+√       ~> Menambahkan TextField komentar
+√       ~> Menampilkan komentar
+√       ~> Navigasi ke daftar artikel berdasarkan kategori
+    -------
+    -> List
+√       ~> Styling
+√       ~> Menambahkan infinite scroll pagination
+√       ~> Menambahkan tombol filter di AppBar
+√       ~> Mengembalikan bottom navbar dari navigasi Detail
+√       ~> Menampilkan kategori pada bottom sheet menggunakan chip
+X       ~> Menambahkan filter keyword
+    -------
+-------
+
+7. Buku
+    -> Detail
+√       ~> Styling
+√       ~> tampilan bottom sheet untuk menambahkan buku ke keranjang
+√       ~> Menghapus bottom navbar
+√       ~> Handle jumlah
+X       ~> Menambahkan buku ke keranjang (Tunggu selesai membuat halaman cart)
+    -------
+X   -> Katalog
+    -------
+-------
+
+8. Kupon
+    -> Detail 
+√       ~> Styling
+X       ~> Mengganti deskripsi menjadi HTML Text (Tunggu semua basenya selesai)
+    -------
+    -> List
+√       ~> Styling
+√       ~> Menambahkan tombol copy
+-       ~> Navigasi ke detail
+X       ~> Menambahkan filter berdasarkan judul dan kode (Tunggu belajar cara membuat animasi)
+    -------
+-------
+
+~~ Sisanya Dipikirin Nanti ~~

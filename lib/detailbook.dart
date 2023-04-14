@@ -326,7 +326,7 @@ class _DetailBookState extends State<DetailBook> {
               : Text('Sinopsis :', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: _loading
                 ? SkeletonParagraph(
                   style: const SkeletonParagraphStyle(
@@ -342,6 +342,12 @@ class _DetailBookState extends State<DetailBook> {
                 )
                 : Html(
                   data: _detailbook['Sinopsis'],
+                  style: {
+                    '*': Style(
+                      padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero
+                    )
+                  },
                 )
             )
             // Padding(

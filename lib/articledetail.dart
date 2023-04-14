@@ -79,6 +79,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
               _loading = true;
             });
             getArticle();
+            komentarController.clear();
           },
           child: ListView(
             padding: EdgeInsets.zero,
@@ -196,7 +197,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 : Text(_detailArticle['Judul'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                 child: _loading 
                 ? SkeletonParagraph(
                   style: const SkeletonParagraphStyle(
@@ -210,7 +211,15 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     ),
                   ) 
                 )
-                : Html(data: _detailArticle['Isi']),
+                : Html(
+                  data: _detailArticle['Isi'],
+                  style: {
+                    '*': Style(
+                      padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero
+                    )
+                  },
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
