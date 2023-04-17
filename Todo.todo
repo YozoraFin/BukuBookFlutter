@@ -1,0 +1,87 @@
+Note:
+    ✓ = Selesai
+    - = Belum selesai
+    X = Cancel
+    ☐ = Belum mulai
+
+1. Keseluruhan:
+    - Menambahkan bottom navbar
+    - Menambahkan Custom Paint
+    ✓ Menambahkan cache untuk gambar @done(23-04-14 08:19)
+    - Menambahkan smart refresh untuk setiap halaman
+    - Menambahkan skeleton untuk setiap halaman
+
+2. Login: 
+    ✓ Styling @done(23-04-14 08:20)
+    ✓ Toggle password @done(23-04-14 08:20)
+    ✓ Handle password salah @done(23-04-14 08:21)
+    ✓ Navigasi ke register @done(23-04-14 08:21)
+    ✓ User login @done(23-04-14 08:21)
+    ✓ Handle user dengan data kurang lengkap @done(23-04-14 08:21)
+    ☐ Login menggunakan OTP (Tunggu semua basenya selesai)
+
+3. Register: 
+    ✓ Styling @done(23-04-14 08:22)
+    ✓ Menambahkan OTP setelah memasukkan Telp & Password @done(23-04-14 08:23)
+    ☐ Menambahkan verifikasi password
+    ✓ Memindahkan TextField informasi setelah OTP @done(23-04-14 08:38)
+    ✓ Navigasi ke login @done(23-04-14 08:38)
+
+4. OTP: 
+    ✓ Styling @done(23-04-14 08:40)
+    ✓ Mengirim OTP ketika masuk ke halaman OTP @done(23-04-14 08:40)
+    ✓ Menambahkan tombol kirim ulang @done(23-04-14 08:40)
+    ✓ Menambahkan user ke DB setelah verifikasi @done(23-04-14 08:41)
+
+5. HomePage:
+    ✓ Styling @done(23-04-14 08:41)
+    ✓ Menambahkan banner @done(23-04-14 08:41)
+    ✓ Menambahkan buku terlaris dan populer @done(23-04-14 08:41)
+    ✓ Nabigasi ke detail buku @done(23-04-14 08:42)
+    ✓ Menambahkan highlight kupon @done(23-04-14 08:42)
+    ✓ Navigasi ke daftar kupon @done(23-04-14 08:42)
+    ✓ Menambahkan artikel terbaru @done(23-04-14 08:42)
+    ✓ Menambahkan carousel kecuali kupon @done(23-04-14 08:42)
+
+6. Artikel: 
+    Detail:
+        ✓ Styling @done(23-04-14 08:43)
+        ✓ Menghapus bottom navbar @done(23-04-14 08:43)
+        ✓ Menampilkan artikel lainnya @done(23-04-14 08:43)
+        ✓ Menambahkan TextField komentar @done(23-04-14 08:43)
+        ✓ menampilkan komentar @done(23-04-14 08:43)
+        ✓ Navigasi ke daftar artikel berdasarkan kategori @done(23-04-14 08:43)
+    List:
+        ✓ Styling @done(23-04-14 08:44)
+        ✓ Menambahkan infinite scroll pagination @done(23-04-14 08:44)
+        ✓ Menambahkan tombol filter di AppBar @done(23-04-14 08:44)
+        ✓ Mengembalikan bottom navbar dari navigasi Detail @done(23-04-14 08:44)
+        ✓ Menampilkan kategori pada bottom sheet menggunakan chip @done(23-04-14 08:44)
+        ☐ Menambahkan filter keyword
+
+7. Buku: 
+    Detail:
+        ✓ Styling @done(23-04-14 08:45)
+        ✓ Bottom sheet untuk menambahkan ke keranjang @done(23-04-14 08:45)
+        ✓ Menghapus bottom navbar @done(23-04-14 08:45)
+        ✓ Handle jumlah @done(23-04-14 08:45)
+        ☐ Menambahkan buku ke keranjang (Tunggu selesai membuat halaman cart)
+    Katalog:
+        ✓ Styling @started(23-04-14 08:50) @done(23-04-14 11:46) @lasted(2h56m36s)
+        ✓ Navigasi ke halaman detail @started(23-04-14 12:31) @done(23-04-14 12:39) @lasted(8m18s)
+        ✓ Menambahkan filter menggunakan keyword @started(23-04-14 12:39) @done(23-04-14 12:41) @lasted(2m46s)
+        ✓ Menambahkan infinite scroll pagination @started(23-04-14 12:42) @done(23-04-14 12:57) @lasted(15m45s)
+        ✓ Menambahkan bottom sheet untuk filter @started(23-04-14 12:58) @done(23-04-17 09:19) @lasted(2d20h21m3s)
+        ✓ Menambahkan tombol clear untuk filter @done(23-04-17 09:19)
+
+8. Kupon:
+    Detail: 
+        ✓ Styling @done(23-04-14 08:46)
+        ☐ Mengganti deskripsi menjadi HTML Text
+    List:
+        ✓ Styling @done(23-04-14 08:47)
+        ✓ Menambahkan tombol copy @done(23-04-14 08:47)
+        ☐ Menambahkan filter berdasarkan judul atau kode
+        ✓ Navigasi ke detail @done(23-04-14 08:47)
+
+- Sisanya dipikir nanti

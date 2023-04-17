@@ -122,7 +122,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 )
                 : GestureDetector(
                   onTap: () {
-                    pushNewScreen(context, screen: BottomNavbar(initial: 1, kategori: _detailArticle['Kategori'],));
+                    pushNewScreen(context, screen: BottomNavbar(initial: 2, kategori: _detailArticle['Kategori'],));
                   },
                   child: Row(
                     children: [

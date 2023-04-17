@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/articlelist.dart';
 import 'package:login_page/homepage.dart';
+import 'package:login_page/katalog.dart';
 import 'package:login_page/login.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -18,6 +19,7 @@ class BottomNavbar extends StatelessWidget {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
+      const Katalog(),
       ArticleList(sKategori: kategori,),
       const Login(),
     ];
@@ -28,6 +30,13 @@ class BottomNavbar extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
         title: 'Beranda',
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.inactiveGray
+      ),
+
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.book),
+        title: 'Katalog',
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.inactiveGray
       ),

@@ -134,83 +134,90 @@ class _ArticleListState extends State<ArticleList> {
             padding: const EdgeInsets.only(right: 20.0),
             child: IconButton(
               onPressed: () {
-                showModalBottomSheet(
-                  backgroundColor: Colors.white,
-                  context: context, 
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical( 
-                      top: Radius.circular(25.0),
+                if(!_loadingKategori) {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.white,
+                    context: context, 
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical( 
+                        top: Radius.circular(25.0),
+                      ),
                     ),
-                  ),
-                  isScrollControlled: true,
-                  builder: (BuildContext context) {
-                    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
-                              child: Text('Kategori', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              child: SizedBox(width: 100, child: Divider(color: Colors.black,)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              child: Wrap(
-                                spacing: 8,
-                                children: [
-                                  for(var kategori in _kategori) Padding(
-                                    padding: const EdgeInsets.only(bottom: 10),
-                                    child: ChoiceChip(
-                                      labelPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                      backgroundColor: Color.fromARGB(255, 244, 244, 244),
-                                      selectedColor: Colors.blue,
-                                      selected: _curKategori == kategori['Kategori'],
-                                      onSelected: (_) {
-                                        if(_curKategori == kategori['Kategori']) {
-                                          getArticle();
-                                          setState(() {
-                                            _curKategori = '';
-                                            _loading = true;
-                                          });
-                                        } else {
-                                          getArticleByKategori(kategori['Kategori']);
-                                          setState(() {
-                                            _curKategori = kategori['Kategori'];
-                                            _loading = true;
-                                          });
-                                        }
-                                      },
-                                      label: Text('${kategori['Kategori']}', style: TextStyle(fontSize: 16, color: _curKategori == kategori['Kategori'] ? Colors.white : Colors.black),),
-                                    ),
-                                  ),
-                                ],
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+                                child: Text('Kategori', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                               ),
-                            ),
-                            const SizedBox(height: 16)
-                          ],
-                        ),
-                      );
-                    });
-                  }
-                );
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                child: SizedBox(width: 100, child: Divider(color: Colors.black,)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                child: Wrap(
+                                  spacing: 8,
+                                  children: [
+                                    for(var kategori in _kategori) Padding(
+                                      padding: const EdgeInsets.only(bottom: 10),
+                                      child: ChoiceChip(
+                                        labelPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                        backgroundColor: Color.fromARGB(255, 244, 244, 244),
+                                        selectedColor: Colors.blue,
+                                        selected: _curKategori == kategori['Kategori'],
+                                        onSelected: (_) {
+                                          if(_curKategori == kategori['Kategori']) {
+                                            getArticle();
+                                            setState(() {
+                                              _curKategori = '';
+                                              _loading = true;
+                                            });
+                                          } else {
+                                            getArticleByKategori(kategori['Kategori']);
+                                            setState(() {
+                                              _curKategori = kategori['Kategori'];
+                                              _loading = true;
+                                            });
+                                          }
+                                        },
+                                        label: Text('${kategori['Kategori']} (${kategori['Total']})', style: TextStyle(fontSize: 16, color: _curKategori == kategori['Kategori'] ? Colors.white : Colors.black),),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 16)
+                            ],
+                          ),
+                        );
+                      });
+                    }
+                  );
+                }
               },
-              icon: Icon(Icons.filter_alt),
+              icon: Icon(Icons.filter_alt, color: _loadingKategori ? Colors.white.withAlpha(150) : Colors.white,),
             )
           ),
-        ],
+        ]
       ),
       body: SmartRefresher(
         controller: _refreshController,
-        onRefresh: () {getArticle(); setState(() {
-          _loading = true;
-        });},
+        onRefresh: () {
+          getArticle();
+          getKategori(); 
+          setState(() {
+            _loading = true;
+            _loadingKategori = true;
+          })
+        ;},
         child: ListView(
           controller: _scrollController,
           shrinkWrap: true,
