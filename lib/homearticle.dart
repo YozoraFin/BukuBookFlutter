@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/articledetail.dart';
 import 'package:login_page/constants.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:skeletons/skeletons.dart';
 
 class HomeArticle extends StatefulWidget {
@@ -112,9 +113,7 @@ class _HomeArticleState extends State<HomeArticle> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: GestureDetector(     
                       onTap: () {
-                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                          builder: (context) => ArticleDetail(id: e['id'] ?? '')
-                        ));
+                        pushNewScreen(context, screen: ArticleDetail(id: e['id'] ?? ''), withNavBar: false);
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/articledetail.dart';
 import 'package:login_page/constants.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -209,6 +210,7 @@ class _ArticleListState extends State<ArticleList> {
         ]
       ),
       body: SmartRefresher(
+        header: WaterDropMaterialHeader(backgroundColor: Theme.of(context).primaryColor),
         controller: _refreshController,
         onRefresh: () {
           getArticle();
@@ -280,9 +282,7 @@ class _ArticleListState extends State<ArticleList> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                    builder: (context) => ArticleDetail(id: artikel['id'] ?? '')
-                  ));
+                  pushNewScreen(context, screen: ArticleDetail(id: artikel['id'] ?? ''), withNavBar: false);
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

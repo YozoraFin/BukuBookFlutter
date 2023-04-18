@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -17,8 +19,10 @@ class DetailBook extends StatefulWidget {
 
 class _DetailBookState extends State<DetailBook> {
   final NumberFormat idr = NumberFormat('#,##0', 'id');
+  final box = GetStorage();
   num _jumlah = 1;
   bool _loading = true;
+  bool _pressed = true;
   RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   Map<String, dynamic> _detailbook = {
@@ -78,19 +82,33 @@ class _DetailBookState extends State<DetailBook> {
                 alignment: Alignment.center
               ),
             )
-            : Center(
-              child: CachedNetworkImage(
-                imageUrl: _detailbook['Sampul'].length < 1 ? '' : _detailbook['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                  child: Center(
-                    child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                  ),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                width: 250,
-                height: 350,
-                fit: BoxFit.cover,
-              )
+            : CarouselSlider(
+              options: CarouselOptions(
+                viewportFraction: 0.7,
+                enableInfiniteScroll: false,
+                height: 350
+              ),
+              items: _detailbook['Sampul'].map((item) => 
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: CachedNetworkImage(
+                        imageUrl: item['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
+                        progressIndicatorBuilder: (context, url, downloadProgress) => Container(
+                          child: Center(
+                            child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        width: 250,
+                        height: 350,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                )
+              ).cast<Widget>().toList(), 
             ),
             const SizedBox(height: 32),
             Padding(
@@ -222,7 +240,7 @@ class _DetailBookState extends State<DetailBook> {
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
-                                            child: Text('x', style: TextStyle(color: Color(0xFF384AEB), fontSize: 25),),
+                                            child: Icon(Icons.clear, color: Color(0xFF384AEB),),
                                           ),
                                         )
                                       ),
@@ -254,6 +272,7 @@ class _DetailBookState extends State<DetailBook> {
                                               Row(
                                                 children: [
                                                   IconButton(
+                                                    splashRadius: 24,
                                                     onPressed: () {
                                                       if(_jumlah > 1) {
                                                         setState(() {
@@ -269,14 +288,19 @@ class _DetailBookState extends State<DetailBook> {
                                                   ),
                                                   Text('${_jumlah}'),
                                                   IconButton(
+                                                    splashRadius: 24,
                                                     onPressed: () {
-                                                      if(_jumlah < _detailbook['Stok']) {
+                                                      if(_jumlah < _detailbook['Stok'] && _jumlah < 50) {
                                                         setState(() {
                                                           _jumlah++;
                                                         });
                                                       } else {
                                                         setState(() {
-                                                          _jumlah = _detailbook['Stok'];
+                                                          if(_detailbook['Stok'] == 0) {
+                                                            _jumlah = 1;
+                                                          } else {
+                                                            _jumlah = _detailbook['Stok'];
+                                                          }
                                                         });
                                                       }
                                                     }, 
@@ -294,7 +318,31 @@ class _DetailBookState extends State<DetailBook> {
                                           width: double.infinity,
                                           child: ElevatedButton(
                                             onPressed: () {
-                                                                        
+                                              if(_detailbook['Stok'] == 0) {
+                                                showDialog(
+                                                  context: context, 
+                                                  builder: (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: Text('Stok Habis!'),
+                                                      content: Text('Anda tidak dapat membelinya karena saat ini stok sedang kosong'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(context);
+                                                          }, 
+                                                          child: Text('Ok')
+                                                        )
+                                                      ],
+                                                    );
+                                                  }
+                                                );
+                                              } else {
+                                                Dio().post('${Constants.baseUrl}/cart/add', data: {'AksesToken': box.read('accesstoken'), 'BukuID': widget.id, 'qty': _jumlah})
+                                                .then((value) => Navigator.pop(context));  
+                                                setState(() {
+                                                _jumlah = 1; 
+                                                });    
+                                              }    
                                             }, 
                                             child: Text('Tambahkan ke Keranjang') 
                                           ),

@@ -121,9 +121,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _loadingBanner
-              ? const SizedBox(height: 0, width: 0)
-              : const SizedBox(height: 48, width: double.infinity),
+              const SizedBox(height: 48, width: double.infinity),
               _loadingBanner 
               ? const SkeletonLine(
                 style: SkeletonLineStyle(

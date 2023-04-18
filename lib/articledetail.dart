@@ -122,7 +122,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 )
                 : GestureDetector(
                   onTap: () {
-                    pushNewScreen(context, screen: BottomNavbar(initial: 2, kategori: _detailArticle['Kategori'],));
+                    pushNewScreen(context, screen: BottomNavbar(initial: 3, kategori: _detailArticle['Kategori'],));
                   },
                   child: Row(
                     children: [
@@ -234,9 +234,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
               ),
               _detailArticle['Prev']['id'] != 0 ? GestureDetector(     
                 onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                    builder: (context) => ArticleDetail(id: _detailArticle['Prev']['id'] ?? '')
-                  ));
+                  pushNewScreen(context, screen: ArticleDetail(id: _detailArticle['Prev']['id'] ?? ''));
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
@@ -286,9 +284,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
               ) : SizedBox(height: 0, width: 0,),
               _detailArticle['Next']['id'] != 0 ? GestureDetector(     
                 onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                    builder: (context) => ArticleDetail(id: _detailArticle['Next']['id'] ?? '')
-                  ));
+                  pushNewScreen(context, screen: ArticleDetail(id: _detailArticle['Next']['id'] ?? ''));
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),

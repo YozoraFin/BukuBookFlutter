@@ -21,7 +21,7 @@ class TextFormRoundBB extends StatelessWidget {
             borderRadius: BorderRadius.circular(50.0)
           ), 
           labelText: placeholder,
-          contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           suffixIcon: sufIcon
         ),
         validator: (value) {

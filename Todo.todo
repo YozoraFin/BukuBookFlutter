@@ -10,6 +10,7 @@ Note:
     ✓ Menambahkan cache untuk gambar @done(23-04-14 08:19)
     - Menambahkan smart refresh untuk setiap halaman
     - Menambahkan skeleton untuk setiap halaman
+    ☐ Mengganti primary color
 
 2. Login: 
     ✓ Styling @done(23-04-14 08:20)
@@ -65,7 +66,8 @@ Note:
         ✓ Bottom sheet untuk menambahkan ke keranjang @done(23-04-14 08:45)
         ✓ Menghapus bottom navbar @done(23-04-14 08:45)
         ✓ Handle jumlah @done(23-04-14 08:45)
-        ☐ Menambahkan buku ke keranjang (Tunggu selesai membuat halaman cart)
+        ✓ Menambahkan buku ke keranjang (Tunggu selesai membuat halaman cart) @started(23-04-17 15:02) @done(23-04-17 15:31) @lasted(29m53s)
+        ✓ Handle sampul > 1 @started(23-04-17 10:10) @done(23-04-17 10:32) @lasted(22m31s)
     Katalog:
         ✓ Styling @started(23-04-14 08:50) @done(23-04-14 11:46) @lasted(2h56m36s)
         ✓ Navigasi ke halaman detail @started(23-04-14 12:31) @done(23-04-14 12:39) @lasted(8m18s)
@@ -83,5 +85,23 @@ Note:
         ✓ Menambahkan tombol copy @done(23-04-14 08:47)
         ☐ Menambahkan filter berdasarkan judul atau kode
         ✓ Navigasi ke detail @done(23-04-14 08:47)
+
+9. Cart:
+    ✓ Styling @started(23-04-17 11:51) @done(23-04-17 12:21) @lasted(30m52s)
+    ✓ Handle jumlah @started(23-04-17 12:21) @done(23-04-17 13:59) @lasted(1h38m44s)
+    ✓ Handle delete @started(23-04-17 13:59) @done(23-04-17 14:55) @lasted(56m19s)
+    ✓ Handle refresh setelah navigasi @started(23-04-18 08:32) @done(23-04-18 10:50) @lasted(2h18m3s)
+    ✓ Handle stok habis @started(23-04-18 11:06) @done(23-04-18 11:29) @lasted(23m45s)
+
+10. Checkout:
+    ☐ Styling
+    ☐ Handle ongkir
+    ☐ Handle kupon
+    ☐ Handle stok habis
+
+11. Profil:
+    ☐ Styling
+    ☐ Handle ganti informasi
+    ☐ Handle ganti foto profil
 
 - Sisanya dipikir nanti

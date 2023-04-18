@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
@@ -123,7 +124,7 @@ class _KatalogState extends State<Katalog> {
       _sort = '';
       _min = '';
       _max = '';
-      _keyword = '';
+      _rangeHarga = RangeValues(0.0, _maxHarga);
       _offset = 10;
       _continue = true;
       _hideEmpty = true;
@@ -210,7 +211,12 @@ class _KatalogState extends State<Katalog> {
                                             children: [
                                               const Text('Filter', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
                                               const SizedBox(width: 10,),
-                                              if(_genre != '' || _sort != '' || _min != '' || _max != '' || !_hideEmpty) GestureDetector(onTap: () => clearFilter(setState), child: const Icon(Icons.clear),)
+                                              if(_genre != '' || _sort != '' || _min != '' || _max != '' || !_hideEmpty) GestureDetector(onTap: () => clearFilter(setState), child: const FaIcon(FontAwesomeIcons.filterCircleXmark, size: 20,),),
+                                              const Spacer(),
+                                              IconButton(
+                                                onPressed: () => Navigator.pop(context), 
+                                                icon: Icon(Icons.clear)
+                                              )
                                             ],
                                           ),
                                           const SizedBox(height: 25,),
@@ -424,6 +430,9 @@ class _KatalogState extends State<Katalog> {
                                                 selectedColor: Colors.blue,
                                                 onSelected: (_) {
                                                   setState(() {
+                                                    _loading = true;
+                                                    _offset = 10;
+                                                    _continue = true;
                                                     _hideEmpty = !_hideEmpty;
                                                     if(_hideEmpty) {
                                                       _bukuList = _bukuData;
@@ -468,9 +477,9 @@ class _KatalogState extends State<Katalog> {
               _loadingGenre = true;
               _showGenre = 5;
             });
+            keywordController.clear();
             clearFilter(setState);
             getGenre();
-            keywordController.clear();
           },
           child: ListView(
             controller: _scrollController,
@@ -493,7 +502,7 @@ class _KatalogState extends State<Katalog> {
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
                     onTap: () {
-                      pushNewScreen(context, screen: DetailBook(id: buku['ID']));
+                      pushNewScreen(context, screen: DetailBook(id: buku['ID']), withNavBar: false,);
                     },
                     child: SizedBox(
                       height: 120,

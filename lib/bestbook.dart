@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
 import 'package:login_page/detailbook.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:skeletons/skeletons.dart';
 
 class BestBook extends StatefulWidget {
@@ -86,9 +87,7 @@ class _BestBookState extends State<BestBook> {
                 : widget.bestBook.map((e) => 
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                        builder: (context) => DetailBook(id: e['id'] ?? '')
-                      ));
+                      pushNewScreen(context, screen: DetailBook(id: e['id'] ?? ''), withNavBar: false);
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

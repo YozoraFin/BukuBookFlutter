@@ -58,9 +58,7 @@ class _HomeCouponState extends State<HomeCoupon> {
                 const SizedBox(height: 10,),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                      builder: (context) => CouponList()
-                    ));
+                    pushNewScreen(context, screen: CouponList(), withNavBar: false);
                   }, 
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
