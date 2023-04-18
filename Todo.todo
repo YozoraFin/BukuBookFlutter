@@ -92,9 +92,10 @@ Note:
     ✓ Handle delete @started(23-04-17 13:59) @done(23-04-17 14:55) @lasted(56m19s)
     ✓ Handle refresh setelah navigasi @started(23-04-18 08:32) @done(23-04-18 10:50) @lasted(2h18m3s)
     ✓ Handle stok habis @started(23-04-18 11:06) @done(23-04-18 11:29) @lasted(23m45s)
+    ☐ Nambahin notif cart
 
 10. Checkout:
-    ☐ Styling
+    ✓ Styling @started(23-04-18 12:10) @done(23-04-18 16:00) @lasted(3h50m21s)
     ☐ Handle ongkir
     ☐ Handle kupon
     ☐ Handle stok habis
