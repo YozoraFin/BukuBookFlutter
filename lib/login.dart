@@ -5,6 +5,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/components/textform.dart';
 import 'package:login_page/fill.dart';
+import 'package:login_page/loginotp.dart';
+import 'package:login_page/otp.dart';
 import 'package:login_page/paint/mainpaint.dart';
 import 'package:login_page/register.dart';
 import 'constants.dart';
@@ -23,7 +25,6 @@ class _LoginState extends State<Login> {
   final box = GetStorage();
 
   TextEditingController telpController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
 
   void submit () {
     setState(() {
@@ -67,23 +68,6 @@ class _LoginState extends State<Login> {
                     placeholder: 'Nomor Telephone',
                     hidePassword: false,
                   ),
-                  TextFormRoundBB(
-                    controller: passwordController, 
-                    placeholder: 'Password', 
-                    sufIcon: IconButton(
-                      onPressed: () {
-                          setState(() {
-                            _hidePassword = !_hidePassword;
-                          });
-                        },
-                        icon: Icon(
-                        _hidePassword
-                        ? Icons.visibility
-                        : Icons.visibility_off
-                      ),
-                    ),
-                    hidePassword: _hidePassword,
-                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: SizedBox(
@@ -93,29 +77,16 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           if(_formKey.currentState!.validate()) {
                             submit();
-                            Dio().post('${Constants.baseUrl}/customer/login', data: {'NoTelp': telpController.text, 'Password': passwordController.text})
+                            Dio().post('${Constants.baseUrl}/customer/loginotp', data: {'NoTelp': telpController.text})
                             .then((response) => {
                               if(response.data['status'] == 200) {
                                 print(response.data),
-                                if(response.data['data'] == true) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Login berhasil')),
+                                Navigator.push(
+                                  context, 
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginOtp(telp: telpController.text,)
                                   ),
-                                  box.write('accesstoken', response.data['accesstoken']),
-                                  Navigator.push(
-                                    context, 
-                                    MaterialPageRoute(
-                                      builder: (context) => BottomNavbar()
-                                    ),
-                                  )
-                                } else {
-                                  Navigator.push(
-                                    context, 
-                                    MaterialPageRoute(
-                                      builder: (context) => FillData(telp: telpController.text)
-                                    ),
-                                  )
-                                }
+                                )
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('Login gagal'))

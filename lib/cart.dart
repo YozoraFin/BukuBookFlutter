@@ -132,7 +132,7 @@ class CartState extends State<Cart> {
                     children: [
                       // Image
                       Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: Row(
                           children: [
                             CachedNetworkImage(
@@ -152,7 +152,7 @@ class CartState extends State<Cart> {
                       ),
                       // Info & Button
                       Expanded(
-                        flex: 5,
+                        flex: 6,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8),
                           child: Column(
@@ -374,7 +374,7 @@ class CartState extends State<Cart> {
                     ElevatedButton(
                       onPressed: () {
                         if(checkStok() && _total < 50) {
-                          pushNewScreen(context, screen: CheckOut(), withNavBar: false);
+                          pushNewScreen(context, screen: const CheckOut(), withNavBar: false);
                         } else {
                           if(!checkStok()) {
                             showDialog(

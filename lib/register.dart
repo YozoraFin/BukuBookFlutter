@@ -21,14 +21,9 @@ class _RegisterState extends State<Register> {
   bool _otpSent = false;
   bool _hidePassword = true;
 
-  TextEditingController namaLengkapController = TextEditingController();
-  TextEditingController namaPanggilanController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController alamatController = TextEditingController();
   TextEditingController noTelpController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController otpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,21 +61,14 @@ class _RegisterState extends State<Register> {
                         hidePassword: false,
                       ),
                       TextFormRoundBB(
-                        controller: passwordController,
+                        controller: confirmPasswordController,
                         placeholder: 'Password',
-                        sufIcon: IconButton(
-                        onPressed: () {
-                            setState(() {
-                              _hidePassword = !_hidePassword;
-                            });
-                          },
-                          icon: Icon(
-                            _hidePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off
-                          ),
-                        ),
-                        hidePassword: _hidePassword,
+                        hidePassword: true,
+                      ),
+                      TextFormRoundBB(
+                        controller: passwordController,
+                        placeholder: 'Konfirmasi Password',
+                        hidePassword: true,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -90,6 +78,7 @@ class _RegisterState extends State<Register> {
                           child: ElevatedButton(
                             onPressed: () {
                                 if(_formKey.currentState!.validate()) {
+                                  if(confirmPasswordController.text == passwordController.text) {
                                     Dio().post('${Constants.baseUrl}/customer/getotp', data: {'NoTelp': noTelpController.text})
                                     .then((response) => {
                                       if(response.data['status'] == 200) {
@@ -108,6 +97,11 @@ class _RegisterState extends State<Register> {
                                         )
                                       },
                                     });
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Konfirmasi password tidak sesuai'))
+                                    );
+                                  }
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(content: Text('Tolong lengkapi form'))
