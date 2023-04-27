@@ -67,6 +67,7 @@ class _LoginState extends State<Login> {
                     controller: telpController,
                     placeholder: 'Nomor Telephone',
                     hidePassword: false,
+                    keyboardType: TextInputType.number,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),

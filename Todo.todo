@@ -105,17 +105,17 @@ BukuBook:
         X Handle stok habis (Uda ada dari API) @cancelled(23-04-19 14:30)
         ✓ Handle checkout @started(23-04-19 13:10) @done(23-04-19 14:31) @lasted(1h21m7s)
 
-    11. Akun:
-        ☐ Styling
-        ☐ Menambahkan navigasi ke halaman profil
-        ☐ Menambahkan navigasi ke halaman contact
-        ☐ Menambahkan navigasi ke halaman riwayat
-        ☐ Menambahkan navigasi untuk logout
+    11. Dashboard:
+        ✓ Styling @started(23-04-26 09:04) @done(23-04-26 14:33) @lasted(5h29m58s)
+        ✓ Navigasi ke profil @done(23-04-27 08:07)
+        ☐ Navigasi ke riwayat 
+        ☐ Navigasi ke contact
+        ✓ Log out @done(23-04-26 14:33)
 
     12. Profil:
-        ☐ Styling
-        ☐ Handle ganti informasi
-        ☐ Handle ganti foto profil
+        ✓ Styling @done(23-04-27 08:07)
+        ✓ Handle ganti informasi @done(23-04-27 08:07)
+        ✓ Handle ganti foto profil @done(23-04-27 12:04)
 
     13. Riwayat Pembelian:
         List:

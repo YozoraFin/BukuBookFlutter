@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:login_page/articlelist.dart';
 import 'package:login_page/cart.dart';
 import 'package:login_page/constants.dart';
+import 'package:login_page/dashboard.dart';
 import 'package:login_page/homepage.dart';
 import 'package:login_page/katalog.dart';
 import 'package:login_page/login.dart';
@@ -42,7 +43,7 @@ class BottomNavbarState extends State<BottomNavbar> {
     return [
       const HomePage(),
       const Katalog(),
-      const Login(),
+      const Dashboard(),
       ArticleList(sKategori: widget.kategori,),
       Cart(key: cartKey,),
     ];
