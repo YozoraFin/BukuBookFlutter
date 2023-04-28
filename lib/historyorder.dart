@@ -24,7 +24,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
   List _list = [];
   bool _loading = true;
   bool _continue = true;
-  RefreshController _refreshController = RefreshController();
+  final RefreshController _refreshController = RefreshController();
 
   @override
   void initState() {
@@ -82,7 +82,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Riwayat Pembelian'),
+        title: const Text('Riwayat Pembelian'),
       ),
       body: SmartRefresher(
         controller: _refreshController,
@@ -155,9 +155,9 @@ class _HistoryOrderState extends State<HistoryOrder> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(data['Invoice'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(data['Invoice'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                         const SizedBox(height: 10,),
-                        Text(data['Tanggal'], style: TextStyle(fontSize: 16, color: Colors.grey),)
+                        Text(data['Tanggal'], style: const TextStyle(fontSize: 16, color: Colors.grey),)
                       ],
                     ),
                     const Spacer(),
@@ -166,7 +166,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                       children: [
                         const Text('Total Harga', style: TextStyle(fontSize: 16),),
                         const SizedBox(height: 10,),
-                        Text('Rp ${idr.format(data['Total'])}', style: TextStyle(fontSize: 18, color: Colors.blue),)
+                        Text('Rp ${idr.format(data['Total'])}', style: const TextStyle(fontSize: 18, color: Colors.blue),)
                       ],
                     )
                   ],

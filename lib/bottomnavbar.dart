@@ -1,14 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/articlelist.dart';
 import 'package:login_page/cart.dart';
-import 'package:login_page/constants.dart';
 import 'package:login_page/dashboard.dart';
 import 'package:login_page/homepage.dart';
 import 'package:login_page/katalog.dart';
-import 'package:login_page/login.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -28,14 +25,7 @@ class BottomNavbar extends StatefulWidget {
 class BottomNavbarState extends State<BottomNavbar> {
   GlobalKey<CartState> cartKey = GlobalKey<CartState>();
 
-  int _initial = 0;
   PersistentTabController _controller = PersistentTabController(initialIndex: 0);
-
-  // Cart
-  List _cartData = [];
-  bool _loadingCart = true;
-  num _total = 0;
-  num _subTotal = 0;
 
   final box = GetStorage();
 
@@ -98,20 +88,6 @@ class BottomNavbarState extends State<BottomNavbar> {
     super.initState();
     setState(() {
       _controller = PersistentTabController(initialIndex: widget.initial);
-    });
-  }
-
-  getCart() {
-    Dio().post('${Constants.baseUrl}/cart/', data: {'AksesToken': box.read('accesstoken')})
-    .then((value) { 
-      setState(() {
-        _cartData = value.data['data']; 
-        _loadingCart = false;
-        for (var item in value.data['data']) {
-          _total += item['Jumlah'];
-          _subTotal += item['Jumlah']*item['Buku']['Harga'];
-        }
-      });
     });
   }
 

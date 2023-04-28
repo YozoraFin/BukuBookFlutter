@@ -25,7 +25,7 @@ class _ArticleListState extends State<ArticleList> {
   // bool _loadingNext = false;
   bool _continue = true;
   final _scrollController = ScrollController();
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
   String? _curKategori = '';
 
   @override
@@ -102,7 +102,7 @@ class _ArticleListState extends State<ArticleList> {
   }
 
   getArticleByKategori(kategori) {
-    Dio().get('${Constants.baseUrl}/artikel/?kategori=${kategori}')
+    Dio().get('${Constants.baseUrl}/artikel/?kategori=$kategori')
     .then((value) {
       if(value.data['data'].length > 5) {
         setState(() {
@@ -170,8 +170,8 @@ class _ArticleListState extends State<ArticleList> {
                                     for(var kategori in _kategori) Padding(
                                       padding: const EdgeInsets.only(bottom: 10),
                                       child: ChoiceChip(
-                                        labelPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                        backgroundColor: Color.fromARGB(255, 244, 244, 244),
+                                        labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                        backgroundColor: const Color.fromARGB(255, 244, 244, 244),
                                         selectedColor: Colors.blue,
                                         selected: _curKategori == kategori['Kategori'],
                                         onSelected: (_) {
@@ -291,10 +291,8 @@ class _ArticleListState extends State<ArticleList> {
                     Center(
                       child: CachedNetworkImage(
                         imageUrl: artikel['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                        progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                          child: Center(
-                            child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                          ),
+                        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                          child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                         ),
                         errorWidget: (context, url, error) => const Icon(Icons.error),
                         width: double.infinity,
@@ -305,12 +303,12 @@ class _ArticleListState extends State<ArticleList> {
                     const SizedBox(height: 10,),
                     RichText(text: TextSpan(
                       children: [
-                        TextSpan(text: 'By ${artikel["Penulis"]} ', style: TextStyle(color: Color(0xFF777777))),
+                        TextSpan(text: 'By ${artikel["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777))),
                         const WidgetSpan(child: Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                           child: Icon(Icons.comment, size: 15, color: Color(0xFF777777),),
                         )),
-                        TextSpan(text: '${artikel["JumlahKomen"]} Komentar', style: TextStyle(color: Color(0xFF777777)))
+                        TextSpan(text: '${artikel["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777)))
                       ]
                     )),
                     const SizedBox(height: 10,),

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
@@ -26,7 +25,7 @@ class _KatalogState extends State<Katalog> {
   int _offset = 10;
   bool _continue = true;
 
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
   TextEditingController keywordController = TextEditingController();
   final _scrollController = ScrollController();
   
@@ -88,7 +87,7 @@ class _KatalogState extends State<Katalog> {
   }
 
   getBuku() {
-    Dio().get('${Constants.baseUrl}/buku?keyword=${_keyword}&genre=${_genre}&sort=${_sort}&min=${_min}&max=${_max}')
+    Dio().get('${Constants.baseUrl}/buku?keyword=$_keyword&genre=$_genre&sort=$_sort&min=$_min&max=$_max')
     .then((value) {
       var min = 0.0;
       var max = value.data['max']/1.0;
@@ -215,7 +214,7 @@ class _KatalogState extends State<Katalog> {
                                               const Spacer(),
                                               IconButton(
                                                 onPressed: () => Navigator.pop(context), 
-                                                icon: Icon(Icons.clear)
+                                                icon: const Icon(Icons.clear)
                                               )
                                             ],
                                           ),
@@ -510,10 +509,8 @@ class _KatalogState extends State<Katalog> {
                         children: [
                           CachedNetworkImage(
                             imageUrl: buku['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                            progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                              child: Center(
-                                child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                              ),
+                            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                              child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                             ),
                             errorWidget: (context, url, error) => const Icon(Icons.error),
                             width: 90,

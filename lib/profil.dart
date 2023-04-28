@@ -7,8 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/components/textform.dart';
 import 'package:login_page/constants.dart';
-import 'package:login_page/dashboard.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -20,10 +18,10 @@ class Profil extends StatefulWidget {
 }
 
 class _ProfilState extends State<Profil> {
-  RefreshController _refreshController = RefreshController();
-  TextEditingController _namaPanggilanController = TextEditingController();
-  TextEditingController _namaLengkapController = TextEditingController();
-  TextEditingController _alamatController = TextEditingController();
+  final RefreshController _refreshController = RefreshController();
+  final TextEditingController _namaPanggilanController = TextEditingController();
+  final TextEditingController _namaLengkapController = TextEditingController();
+  final TextEditingController _alamatController = TextEditingController();
   
   XFile? _profile;
   String _profileUrl = '';
@@ -92,10 +90,10 @@ class _ProfilState extends State<Profil> {
               Navigator.pop(context);
             });
           }, 
-          child: Text('Simpan')
+          child: const Text('Simpan')
         ),
         appBar: AppBar(
-          title: Text('Profil'),
+          title: const Text('Profil'),
         ),
         body: SmartRefresher(
           controller: _refreshController,
@@ -242,10 +240,8 @@ class _ProfilState extends State<Profil> {
                             ? Image.file(File(_profile!.path), fit: BoxFit.cover, width: 125, height: 125,)
                             : CachedNetworkImage(
                               imageUrl: _profileUrl == '' ? Constants.emptProfile : _profileUrl.replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                              progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                                child: Center(
-                                  child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                                ),
+                              progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                               ),
                               errorWidget: (context, url, error) => const Icon(Icons.error),
                               width: 125,
@@ -258,7 +254,7 @@ class _ProfilState extends State<Profil> {
                                 color: Colors.black.withOpacity(0.6),
                                 height: 30,
                                 width: 125,
-                                child: Center(child: FaIcon(FontAwesomeIcons.camera, size: 18, color: Colors.white,)),
+                                child: const Center(child: FaIcon(FontAwesomeIcons.camera, size: 18, color: Colors.white,)),
                               ),
                             )
                           ]

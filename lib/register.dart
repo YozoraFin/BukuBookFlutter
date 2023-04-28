@@ -17,10 +17,6 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   
-  bool _verified = false;
-  bool _otpSent = false;
-  bool _hidePassword = true;
-
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController noTelpController = TextEditingController();
@@ -99,7 +95,7 @@ class _RegisterState extends State<Register> {
                                     });
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Konfirmasi password tidak sesuai'))
+                                      const SnackBar(content: Text('Konfirmasi password tidak sesuai'))
                                     );
                                   }
                                 } else {

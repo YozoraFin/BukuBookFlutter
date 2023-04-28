@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/articledetail.dart';
 import 'package:login_page/constants.dart';
@@ -121,10 +120,8 @@ class _HomeArticleState extends State<HomeArticle> {
                           Center(
                             child: CachedNetworkImage(
                               imageUrl: e['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                              progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                                child: Center(
-                                  child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                                ),
+                              progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                               ),
                               errorWidget: (context, url, error) => const Icon(Icons.error),
                               width: 360,
@@ -135,12 +132,12 @@ class _HomeArticleState extends State<HomeArticle> {
                           const SizedBox(height: 10,),
                           RichText(text: TextSpan(
                             children: [
-                              TextSpan(text: 'By ${e["Penulis"]} ', style: TextStyle(color: Color(0xFF777777))),
+                              TextSpan(text: 'By ${e["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777))),
                               const WidgetSpan(child: Padding(
                                 padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child: Icon(Icons.comment, size: 15, color: Color(0xFF777777),),
                               )),
-                              TextSpan(text: '${e["JumlahKomen"]} Komentar', style: TextStyle(color: Color(0xFF777777)))
+                              TextSpan(text: '${e["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777)))
                             ]
                           )),
                           const SizedBox(height: 10,),
@@ -163,7 +160,7 @@ class _HomeArticleState extends State<HomeArticle> {
                     child: Container(
                       width: 8.0,
                       height: 8.0,
-                      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 4.0),
+                      margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4.0),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: (Theme.of(context).brightness == Brightness.dark

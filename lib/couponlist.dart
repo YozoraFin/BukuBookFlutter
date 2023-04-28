@@ -146,10 +146,8 @@ class _CouponListState extends State<CouponList> {
                             child: Center(
                               child: CachedNetworkImage(
                                 imageUrl: kupon['SrcGambar'] != '' ? kupon['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl) : "${Constants.baseUrl}/foto/kupon/SrcGambar-1680162638483.png",
-                                progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                                  child: Center(
-                                    child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                                  ),
+                                progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                  child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                                 ),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 width: double.infinity,

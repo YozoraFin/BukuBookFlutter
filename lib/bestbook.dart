@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
@@ -95,10 +94,8 @@ class _BestBookState extends State<BestBook> {
                         Center(
                           child: CachedNetworkImage(
                             imageUrl: e['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                            progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                              child: Center(
-                                child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                              ),
+                            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                              child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                             ),
                             errorWidget: (context, url, error) => const Icon(Icons.error),
                             width: 150,

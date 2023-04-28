@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
+import 'package:skeletons/skeletons.dart';
 
 class CouponDetail extends StatefulWidget {
   const CouponDetail({super.key, required this.id});
@@ -53,10 +54,8 @@ class _CouponDetailState extends State<CouponDetail> {
           Center(
             child: CachedNetworkImage(
               imageUrl: _couponDetail['SrcGambar'] != '' ? _couponDetail['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl) : "${Constants.baseUrl}/foto/kupon/SrcGambar-1680162638483.png",
-              progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                child: Center(
-                  child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                ),
+              progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
               ),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
@@ -68,14 +67,16 @@ class _CouponDetailState extends State<CouponDetail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                Center(child: Text(_couponDetail['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30))),
+                Center(child: _loading ? const SkeletonLine(style: SkeletonLineStyle(width: 200, height: 30, alignment: Alignment.center),) : Text(_couponDetail['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30))),
                 const SizedBox(height: 10),
                 const Divider(color: Colors.black),
                 const SizedBox(height: 10),
                 const Text('Kode:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
+                  child: _loading
+                  ? const SkeletonLine(style: SkeletonLineStyle(height: 14, padding: EdgeInsets.symmetric(vertical: 20)),)
+                  : Row(
                     children: [
                       Text(_couponDetail['Kode'], style: const TextStyle(fontSize: 14)),
                       const Spacer(),
@@ -101,14 +102,18 @@ class _CouponDetailState extends State<CouponDetail> {
                 const SizedBox(height: 5),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(_couponDetail['Tipe'] ? 'Diskon ${_couponDetail['Potongan']}%' : 'Rp ${idr.format(_couponDetail['Potongan'])}', style: const TextStyle(fontSize: 14),),
+                  child: _loading
+                  ? const SkeletonLine(style: SkeletonLineStyle(height: 14, width: 70, padding: EdgeInsets.only(bottom: 15)),)
+                  : Text(_couponDetail['Tipe'] ? 'Diskon ${_couponDetail['Potongan']}%' : 'Rp ${idr.format(_couponDetail['Potongan'])}', style: const TextStyle(fontSize: 14),),
                 ),
                 const SizedBox(height: 20),
                 const Text('Deskripsi:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                 const SizedBox(height: 5),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(_couponDetail['Deskripsi'], style: const TextStyle(fontSize: 14)),
+                  child: _loading
+                  ? const SkeletonLine(style: SkeletonLineStyle(height: 14, width: 140, padding: EdgeInsets.only(bottom: 15)),)
+                  : Text(_couponDetail['Deskripsi'], style: const TextStyle(fontSize: 14)),
                 )
               ],
             ),

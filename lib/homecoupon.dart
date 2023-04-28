@@ -58,7 +58,7 @@ class _HomeCouponState extends State<HomeCoupon> {
                 const SizedBox(height: 10,),
                 ElevatedButton(
                   onPressed: () {
-                    pushNewScreen(context, screen: CouponList(), withNavBar: false);
+                    pushNewScreen(context, screen: const CouponList(), withNavBar: false);
                   }, 
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -72,7 +72,7 @@ class _HomeCouponState extends State<HomeCoupon> {
               ],
             ),
           ),
-          Spacer(flex: 2,)
+          const Spacer(flex: 2,)
         ],
       ),
     );

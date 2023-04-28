@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/constants.dart';
 
@@ -31,7 +30,7 @@ class _HomeBannerState extends State<HomeBanner> {
               Center(
                 child: CachedNetworkImage(
                   imageUrl: item['SrcBanner'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                  progressIndicatorBuilder: (context, url, downloadProgress) => Container(
+                  progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
                     width: 150,
                     height: 300,
                     child: Center(

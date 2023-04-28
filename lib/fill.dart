@@ -78,7 +78,7 @@ class _FillDataState extends State<FillData> {
                                       Navigator.push(
                                         context, 
                                         MaterialPageRoute(
-                                          builder: (context) => BottomNavbar(initial: 0,)
+                                          builder: (context) => const BottomNavbar(initial: 0,)
                                         ),
                                       )
                                     } else {

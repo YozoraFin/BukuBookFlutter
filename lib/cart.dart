@@ -29,7 +29,7 @@ class CartState extends State<Cart> {
   Timer? _debounceTimer;
   num _total = 0;
   num _subTotal = 0;
-  RefreshController _refreshController = RefreshController();
+  final RefreshController _refreshController = RefreshController();
   List _listItem = [];
   bool _loading = true;
   bool _pressed = false;

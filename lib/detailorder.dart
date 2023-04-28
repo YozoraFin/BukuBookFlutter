@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:skeletons/skeletons.dart';
 
 class DetailOrder extends StatefulWidget {
@@ -48,7 +47,6 @@ class _DetailOrderState extends State<DetailOrder> {
   getData() {
     Dio().post('${Constants.baseUrl}/order/detail/${widget.id}', data: {'AksesToken': box.read('accesstoken')})
     .then((value) {
-      print(value);
       setState(() {
         _data = value.data['data'];
         _loading = false;

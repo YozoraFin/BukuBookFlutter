@@ -33,7 +33,7 @@ class _LoginOtpState extends State<LoginOtp> {
 
   void _startTimer() {
     _counter = 30;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) { 
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) { 
       if(_counter > 0) {
         setState(() {
           _counter--;

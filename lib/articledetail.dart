@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:login_page/articlelist.dart';
 import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/constants.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -43,7 +42,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
     'JumlahKomen': 0
   };
   bool _loading = true;
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -97,10 +96,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
               : Center(
                 child: CachedNetworkImage(
                   imageUrl: _detailArticle['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                  progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                    child: Center(
-                      child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                    ),
+                  progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                    child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                   width: 350,
@@ -127,8 +124,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   child: Row(
                     children: [
                       const Icon(Icons.category),
-                      SizedBox(width: 5,),
-                      Text(_detailArticle['Kategori'], style: TextStyle(color: Color(0xFF777777)))
+                      const SizedBox(width: 5,),
+                      Text(_detailArticle['Kategori'], style: const TextStyle(color: Color(0xFF777777)))
                     ],
                   ),
                 ),
@@ -145,8 +142,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 : Row(
                   children: [
                     const Icon(Icons.person),
-                    SizedBox(width: 5,),
-                    Text(_detailArticle['Penulis'], style: TextStyle(color: Color(0xFF777777)))
+                    const SizedBox(width: 5,),
+                    Text(_detailArticle['Penulis'], style: const TextStyle(color: Color(0xFF777777)))
                   ],
                 ),
               ),
@@ -162,8 +159,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 : Row(
                   children: [
                     const Icon(Icons.calendar_month),
-                    SizedBox(width: 5,),
-                    Text(_detailArticle['Tanggal'], style: TextStyle(color: Color(0xFF777777)))
+                    const SizedBox(width: 5,),
+                    Text(_detailArticle['Tanggal'], style: const TextStyle(color: Color(0xFF777777)))
                   ],
                 ),
               ),
@@ -179,8 +176,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 : Row(
                   children: [
                     const Icon(Icons.chat_bubble),
-                    SizedBox(width: 5,),
-                    Text('${_detailArticle['JumlahKomen']} Komentar', style: TextStyle(color: Color(0xFF777777)))
+                    const SizedBox(width: 5,),
+                    Text('${_detailArticle['JumlahKomen']} Komentar', style: const TextStyle(color: Color(0xFF777777)))
                   ],
                 ),
               ),
@@ -194,7 +191,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     height: 25,
                   ),
                 )
-                : Text(_detailArticle['Judul'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                : Text(_detailArticle['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
@@ -230,7 +227,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     height: 25,
                   ),
                 )
-                : Text('Artikel Lainnya', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                : const Text('Artikel Lainnya', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
               ),
               _detailArticle['Prev']['id'] != 0 ? GestureDetector(     
                 onTap: () {
@@ -252,10 +249,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       : Center(
                         child: CachedNetworkImage(
                           imageUrl: _detailArticle['Prev']['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                          progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                            child: Center(
-                              child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                            ),
+                          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                            child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                           ),
                           errorWidget: (context, url, error) => const Icon(Icons.error),
                           width: double.infinity,
@@ -281,7 +276,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     ],
                   ),
                 ),
-              ) : SizedBox(height: 0, width: 0,),
+              ) : const SizedBox(height: 0, width: 0,),
               _detailArticle['Next']['id'] != 0 ? GestureDetector(     
                 onTap: () {
                   pushNewScreen(context, screen: ArticleDetail(id: _detailArticle['Next']['id'] ?? ''));
@@ -302,10 +297,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       : Center(
                         child: CachedNetworkImage(
                           imageUrl: _detailArticle['Next']['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                          progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                            child: Center(
-                              child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                            ),
+                          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                            child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                           ),
                           errorWidget: (context, url, error) => const Icon(Icons.error),
                           width: double.infinity,
@@ -345,7 +338,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     height: 25,
                   ),
                 )
-                : Text('Komentar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                : const Text('Komentar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -391,13 +384,13 @@ class _ArticleDetailState extends State<ArticleDetail> {
                         .then((value) {
                           getArticle();
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Komentar berhasil ditambahkan')),
+                            const SnackBar(content: Text('Komentar berhasil ditambahkan')),
                           );
                           komentarController.clear();
                         });
                       }
                     },
-                    child: Text('Kirim'),
+                    child: const Text('Kirim'),
                   ),
                 ),
               ),
@@ -412,7 +405,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       alignment: Alignment.center
                     ),
                   )
-                  : Text('${_detailArticle['JumlahKomen']} Komentar', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  : Text('${_detailArticle['JumlahKomen']} Komentar', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                 ),
               ),
               Padding(
@@ -442,7 +435,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                           Expanded(
                             flex: 3,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(left: 10),
                               child: Column(
                                 children: [
                                   const SkeletonLine(
@@ -490,10 +483,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                               children: [
                                 CachedNetworkImage(
                                   imageUrl: komentar['Customer']['Profil'] == '' ? Constants.emptProfile : komentar['Customer']['Profil'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                                  progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                                    child: Center(
-                                      child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                                    ),
+                                  progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                    child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                                   ),
                                   errorWidget: (context, url, error) => const Icon(Icons.error),
                                   width: 75,
@@ -511,11 +502,11 @@ class _ArticleDetailState extends State<ArticleDetail> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(komentar['Customer']['NamaLengkap'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                                  SizedBox(height: 7),
-                                  Text(komentar['Tanggal'], style: TextStyle(color: Color(0xFF777777)),),
-                                  SizedBox(height: 10),
-                                  Text(komentar['Komentar'], style: TextStyle(color: Color(0xFF555555), height: 1.5, letterSpacing: 0.8),)
+                                  Text(komentar['Customer']['NamaLengkap'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                  const SizedBox(height: 7),
+                                  Text(komentar['Tanggal'], style: const TextStyle(color: Color(0xFF777777)),),
+                                  const SizedBox(height: 10),
+                                  Text(komentar['Komentar'], style: const TextStyle(color: Color(0xFF555555), height: 1.5, letterSpacing: 0.8),)
                                 ],
                               ),
                             )

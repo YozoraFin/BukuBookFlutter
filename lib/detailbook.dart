@@ -22,8 +22,7 @@ class _DetailBookState extends State<DetailBook> {
   final box = GetStorage();
   num _jumlah = 1;
   bool _loading = true;
-  bool _pressed = true;
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   Map<String, dynamic> _detailbook = {
     'Judul': '',
@@ -95,10 +94,8 @@ class _DetailBookState extends State<DetailBook> {
                     Center(
                       child: CachedNetworkImage(
                         imageUrl: item['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                        progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                          child: Center(
-                            child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                          ),
+                        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                          child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                         ),
                         errorWidget: (context, url, error) => const Icon(Icons.error),
                         width: 250,
@@ -159,7 +156,7 @@ class _DetailBookState extends State<DetailBook> {
                                       padding: EdgeInsets.only(bottom: 5)
                                     ),
                                   )
-                                  : Text('Genre', style: TextStyle(fontSize: 18)),
+                                  : const Text('Genre', style: TextStyle(fontSize: 18)),
                                   _loading
                                   ? const SkeletonLine(
                                     style: SkeletonLineStyle(
@@ -167,7 +164,7 @@ class _DetailBookState extends State<DetailBook> {
                                       height: 18,
                                     ),
                                   )
-                                  : Text('Stok', style: TextStyle(fontSize: 18)),
+                                  : const Text('Stok', style: TextStyle(fontSize: 18)),
                                   // Text('Jumlah', style: TextStyle(fontSize: 18))
                                 ],
                               ),
@@ -240,7 +237,7 @@ class _DetailBookState extends State<DetailBook> {
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
-                                            child: Icon(Icons.clear, color: Color(0xFF384AEB),),
+                                            child: const Icon(Icons.clear, color: Color(0xFF384AEB),),
                                           ),
                                         )
                                       ),
@@ -251,10 +248,8 @@ class _DetailBookState extends State<DetailBook> {
                                             child: Center(
                                               child: CachedNetworkImage(
                                                 imageUrl: _detailbook['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                                                progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                                                  child: Center(
-                                                    child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                                                  ),
+                                                progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                  child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                                                 ),
                                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                                 width: 75,
@@ -284,9 +279,9 @@ class _DetailBookState extends State<DetailBook> {
                                                         });
                                                       }
                                                     }, 
-                                                    icon: Icon(Icons.remove, color: Color(0xFF384AEB),)
+                                                    icon: const Icon(Icons.remove, color: Color(0xFF384AEB),)
                                                   ),
-                                                  Text('${_jumlah}'),
+                                                  Text('$_jumlah'),
                                                   IconButton(
                                                     splashRadius: 24,
                                                     onPressed: () {
@@ -304,7 +299,7 @@ class _DetailBookState extends State<DetailBook> {
                                                         });
                                                       }
                                                     }, 
-                                                    icon: Icon(Icons.add, color: Color(0xFF384AEB),)
+                                                    icon: const Icon(Icons.add, color: Color(0xFF384AEB),)
                                                   ),
                                                 ],
                                               )
@@ -323,14 +318,14 @@ class _DetailBookState extends State<DetailBook> {
                                                   context: context, 
                                                   builder: (BuildContext context) {
                                                     return AlertDialog(
-                                                      title: Text('Stok Habis!'),
-                                                      content: Text('Anda tidak dapat membelinya karena saat ini stok sedang kosong'),
+                                                      title: const Text('Stok Habis!'),
+                                                      content: const Text('Anda tidak dapat membelinya karena saat ini stok sedang kosong'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () {
                                                             Navigator.pop(context);
                                                           }, 
-                                                          child: Text('Ok')
+                                                          child: const Text('Ok')
                                                         )
                                                       ],
                                                     );
@@ -344,7 +339,7 @@ class _DetailBookState extends State<DetailBook> {
                                                 });    
                                               }    
                                             }, 
-                                            child: Text('Tambahkan ke Keranjang') 
+                                            child: const Text('Tambahkan ke Keranjang') 
                                           ),
                                         ),
                                       )
@@ -371,7 +366,7 @@ class _DetailBookState extends State<DetailBook> {
                   height: 20,
                 ),
               )
-              : Text('Sinopsis :', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              : const Text('Sinopsis :', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

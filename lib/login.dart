@@ -2,11 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/components/textform.dart';
-import 'package:login_page/fill.dart';
 import 'package:login_page/loginotp.dart';
-import 'package:login_page/otp.dart';
 import 'package:login_page/paint/mainpaint.dart';
 import 'package:login_page/register.dart';
 import 'constants.dart';
@@ -20,7 +17,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String _button = 'Login';
-  bool _hidePassword = true;
   final _formKey = GlobalKey<FormState>();
   final box = GetStorage();
 
@@ -81,7 +77,6 @@ class _LoginState extends State<Login> {
                             Dio().post('${Constants.baseUrl}/customer/loginotp', data: {'NoTelp': telpController.text})
                             .then((response) => {
                               if(response.data['status'] == 200) {
-                                print(response.data),
                                 Navigator.push(
                                   context, 
                                   MaterialPageRoute(

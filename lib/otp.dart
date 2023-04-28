@@ -6,7 +6,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/constants.dart';
 import 'package:login_page/fill.dart';
-import 'package:login_page/login.dart';
 import 'package:login_page/paint/mainpaint.dart';
 import 'package:otp_text_field/otp_field.dart';
 
@@ -32,7 +31,7 @@ class _OtpState extends State<Otp> {
 
   void _startTimer() {
     _counter = 30;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) { 
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) { 
       if(_counter > 0) {
         setState(() {
           _counter--;

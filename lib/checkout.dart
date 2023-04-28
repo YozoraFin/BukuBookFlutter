@@ -32,7 +32,6 @@ class CheckoutState extends State<CheckOut> {
     'kota': '',
     'id': ''
   };
-  List _listKurir = [];
   String _selectedKurir = '';
   int _subtotal = 0;
   int _jumlah = 0;
@@ -43,7 +42,7 @@ class CheckoutState extends State<CheckOut> {
   bool _continue = false;
   bool _checkout = false;
 
-  RefreshController _refreshController = RefreshController();
+  final RefreshController _refreshController = RefreshController();
   TextEditingController couponController = TextEditingController();
   TextEditingController namaLengkapController = TextEditingController();
   TextEditingController nomorHpController = TextEditingController();
@@ -55,9 +54,9 @@ class CheckoutState extends State<CheckOut> {
   final NumberFormat idr = NumberFormat('#,##0', 'id');
   final box = GetStorage();
   final List<DropdownMenuItem> kurirOption = [
-    const DropdownMenuItem(child: Text('JNE'), value: 'jne'),
-    const DropdownMenuItem(child: Text('POS Indonesia'), value: 'pos'),
-    const DropdownMenuItem(child: Text('TIKI'), value: 'tiki')
+    const DropdownMenuItem(value: 'jne', child: Text('JNE')),
+    const DropdownMenuItem(value: 'pos', child: Text('POS Indonesia')),
+    const DropdownMenuItem(value: 'tiki', child: Text('TIKI'))
   ];
 
   @override
@@ -113,7 +112,7 @@ class CheckoutState extends State<CheckOut> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Checkout'),
+          title: const Text('Checkout'),
         ),
         body: SmartRefresher(
           controller: _refreshController,
@@ -191,7 +190,7 @@ class CheckoutState extends State<CheckOut> {
                             });
                           });
                         }, 
-                        child: Text('Gunakan!')
+                        child: const Text('Gunakan!')
                       ),
                     ),
                     const SizedBox(height: 30),
@@ -249,7 +248,7 @@ class CheckoutState extends State<CheckOut> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: DropdownSearch(
-                              enabled: !_loadingKota && !_listKota.isEmpty,
+                              enabled: !_loadingKota && _listKota.isNotEmpty,
                               selectedItem: _selectedKota['id'] == '' ? null : _selectedKota,
                               dropdownSearchDecoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -269,7 +268,6 @@ class CheckoutState extends State<CheckOut> {
                                   _total = _total - _ongkir;
                                   _ongkir = 0;
                                 });
-                                print(val['id']);
                               },
                             ),
                           ),
@@ -354,7 +352,7 @@ class CheckoutState extends State<CheckOut> {
                                                           setOngkir(layanan['harga']);
                                                           Navigator.pop(context);
                                                         },
-                                                        title: Text('Rp ${idr.format(layanan['harga'])} ${layanan['deskripsi']} ${layanan['estimasi']}', style: TextStyle(color: Color(0xFF777777)),),
+                                                        title: Text('Rp ${idr.format(layanan['harga'])} ${layanan['deskripsi']} ${layanan['estimasi']}', style: const TextStyle(color: Color(0xFF777777)),),
                                                       ),
                                                     ],
                                                   );
@@ -408,11 +406,11 @@ class CheckoutState extends State<CheckOut> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(width: 150, child: Text(item['Buku']['Judul'], style: TextStyle(color: Color(0xFF777777)),)),
+                                SizedBox(width: 150, child: Text(item['Buku']['Judul'], style: const TextStyle(color: Color(0xFF777777)),)),
                                 const Spacer(),
-                                SizedBox(width: 30, child: Align(alignment: Alignment.center, child: Text('x ${item['Jumlah']}', style: TextStyle(color: Color(0xFF777777))))),
+                                SizedBox(width: 30, child: Align(alignment: Alignment.center, child: Text('x ${item['Jumlah']}', style: const TextStyle(color: Color(0xFF777777))))),
                                 const Spacer(),
-                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(item['Buku']['Harga']*item['Jumlah'])}', style: TextStyle(color: Color(0xFF777777)))))
+                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(item['Buku']['Harga']*item['Jumlah'])}', style: const TextStyle(color: Color(0xFF777777)))))
                               ],
                             ),
                           )}),
@@ -425,7 +423,7 @@ class CheckoutState extends State<CheckOut> {
                                 const Spacer(),
                                 const SizedBox(width: 30,),
                                 const Spacer(),
-                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_subtotal)}', style: TextStyle(fontWeight: FontWeight.bold)),),)
+                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_subtotal)}', style: const TextStyle(fontWeight: FontWeight.bold)),),)
                               ],
                             ),
                           ),
@@ -438,7 +436,7 @@ class CheckoutState extends State<CheckOut> {
                                 const Spacer(),
                                 const SizedBox(width: 30,),
                                 const Spacer(),
-                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_potongan)}', style: TextStyle(fontWeight: FontWeight.bold)),),)
+                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_potongan)}', style: const TextStyle(fontWeight: FontWeight.bold)),),)
                               ],
                             ),
                           ),
@@ -451,7 +449,7 @@ class CheckoutState extends State<CheckOut> {
                                 const Spacer(),
                                 const SizedBox(width: 30,),
                                 const Spacer(),
-                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_ongkir)}', style: TextStyle(fontWeight: FontWeight.bold)),),)
+                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_ongkir)}', style: const TextStyle(fontWeight: FontWeight.bold)),),)
                               ],
                             ),
                           ),
@@ -464,7 +462,7 @@ class CheckoutState extends State<CheckOut> {
                                 const Spacer(),
                                 const SizedBox(width: 30,),
                                 const Spacer(),
-                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_ppn)}', style: TextStyle(fontWeight: FontWeight.bold)),),)
+                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_ppn)}', style: const TextStyle(fontWeight: FontWeight.bold)),),)
                               ],
                             ),
                           ),
@@ -477,7 +475,7 @@ class CheckoutState extends State<CheckOut> {
                                 const Spacer(),
                                 const SizedBox(width: 30,),
                                 const Spacer(),
-                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_total+_ppn)}', style: TextStyle(fontWeight: FontWeight.bold)),),)
+                                SizedBox(width: 100, child: Align(alignment: Alignment.topRight, child: Text('Rp ${idr.format(_total+_ppn)}', style: const TextStyle(fontWeight: FontWeight.bold)),),)
                               ],
                             ),
                           ),
@@ -544,11 +542,10 @@ class CheckoutState extends State<CheckOut> {
                                                   };
                                                   Dio().post('${Constants.baseUrl}/checkout', data: object  )
                                                   .then((value) {
-                                                    print(value.data);
                                                     if(value.data['status'] == 200) {
                                                       pushNewScreen(context, screen: DetailOrder(id: value.data['OrderID']));
                                                     } else {
-                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Terjadi kesalahan ketika melakukan checkout')));
+                                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Terjadi kesalahan ketika melakukan checkout')));
                                                     }
                                                   });
                                                   Navigator.pop(context);

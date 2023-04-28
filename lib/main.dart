@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/constants.dart';
-import 'package:login_page/register.dart';
 import 'package:login_page/splash.dart';
 import 'login.dart';
 
@@ -38,7 +37,7 @@ class _LoadPageState extends State<LoadPage> {
       builder: (context, AsyncSnapshot<bool> snapshot) {
         if(snapshot.hasData) {
           if(snapshot.data ?? false) {
-            return BottomNavbar(initial: 0,);
+            return const BottomNavbar(initial: 0,);
           } else {
             box.erase();
             return const Login();

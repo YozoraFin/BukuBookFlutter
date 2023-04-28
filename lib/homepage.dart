@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     'SrcGambar': ''
   };
 
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   @override
   void initState() {

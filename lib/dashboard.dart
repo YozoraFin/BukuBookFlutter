@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/constants.dart';
-import 'package:login_page/contact.dart';
 import 'package:login_page/historyorder.dart';
 import 'package:login_page/login.dart';
 import 'package:login_page/profil.dart';
@@ -29,7 +28,7 @@ class DashboardState extends State<Dashboard> {
     'Profil': ''
   };
   bool _loading = true;
-  RefreshController _refreshController = RefreshController();
+  final RefreshController _refreshController = RefreshController();
 
   final box = GetStorage();
 
@@ -99,10 +98,8 @@ class DashboardState extends State<Dashboard> {
                             : ClipOval(
                               child: CachedNetworkImage(
                                 imageUrl: _data['Profil'] == '' ? Constants.emptProfile : _data['Profil'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                                progressIndicatorBuilder: (context, url, downloadProgress) => Container(
-                                  child: Center(
-                                    child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                                  ),
+                                progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                  child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                                 ),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 width: 75,
@@ -115,9 +112,9 @@ class DashboardState extends State<Dashboard> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('${_data['NamaPanggilan']}', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
+                                Text('${_data['NamaPanggilan']}', style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
                                 const SizedBox(height: 5,),
-                                Text('${_data['Email']}', style: TextStyle(color: Colors.white),),
+                                Text('${_data['Email']}', style: const TextStyle(color: Colors.white),),
                               ],
                             ),
                             const Spacer(),
@@ -133,7 +130,7 @@ class DashboardState extends State<Dashboard> {
             const SizedBox(height: 16,),
             InkWell(
               onTap: () {
-                pushNewScreen(context, screen: HistoryOrder(), withNavBar: false);
+                pushNewScreen(context, screen: const HistoryOrder(), withNavBar: false);
               },
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -150,7 +147,7 @@ class DashboardState extends State<Dashboard> {
               onTap: () {
                 // pushNewScreen(context, screen: const Contact(), withNavBar: false);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('WIP'))
+                  const SnackBar(content: Text('WIP'))
                 );
               },
               child: Padding(
@@ -183,7 +180,7 @@ class DashboardState extends State<Dashboard> {
                           onPressed: () {
                             Navigator.pop(context);
                             box.remove('accesstoken');
-                            pushNewScreen(context, screen: Login(), withNavBar: false);
+                            pushNewScreen(context, screen: const Login(), withNavBar: false);
                           }, 
                           child: const Text('Ya')
                         )
