@@ -489,7 +489,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                             child: Row(
                               children: [
                                 CachedNetworkImage(
-                                  imageUrl: komentar['Customer']['Profil'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
+                                  imageUrl: komentar['Customer']['Profil'] == '' ? Constants.emptProfile : komentar['Customer']['Profil'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
                                   progressIndicatorBuilder: (context, url, downloadProgress) => Container(
                                     child: Center(
                                       child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)

@@ -3,16 +3,16 @@ Note:
     - = Belum selesai
     X = Cancel
     ☐ = Belum mulai
-    @Format(Tahun-Bulan-Tanggal Jam:Menit)
+    @Format(Tahun-Bulan-Tanggal Jam:Menit) Jangan tanya kenapa
 
 BukuBook:
 
     1. Keseluruhan:
         ✓ Menambahkan bottom navbar @done(23-04-19 14:46)
-        - Menambahkan Custom Paint
+        ✓ Menambahkan Custom Paint @done(23-04-28 09:34)
         ✓ Menambahkan cache untuk gambar @done(23-04-14 08:19)
-        - Menambahkan smart refresh untuk setiap halaman
-        - Menambahkan skeleton untuk setiap halaman
+        ✓ Menambahkan smart refresh untuk setiap halaman @done(23-04-28 09:34)
+        ✓ Menambahkan skeleton untuk setiap halaman @done(23-04-28 09:34)
         ☐ Mengganti primary color
 
     2. Login: 
@@ -22,7 +22,7 @@ BukuBook:
         ✓ Navigasi ke register @done(23-04-14 08:21)
         ✓ User login @done(23-04-14 08:21)
         ✓ Handle user dengan data kurang lengkap @done(23-04-14 08:21)
-        ☐ Login menggunakan OTP (Tunggu semua basenya selesai) @started(23-04-20 09:47)
+        ✓ Login menggunakan OTP (Tunggu semua basenya selesai) @started(23-04-20 09:47) @done(23-04-28 09:34) @lasted(1w23h47m3s)
 
     3. Register: 
         ✓ Styling @done(23-04-14 08:22)
@@ -95,7 +95,7 @@ BukuBook:
         ✓ Handle delete @started(23-04-17 13:59) @done(23-04-17 14:55) @lasted(56m19s)
         ✓ Handle refresh setelah navigasi @started(23-04-18 08:32) @done(23-04-18 10:50) @lasted(2h18m3s)
         ✓ Handle stok habis @started(23-04-18 11:06) @done(23-04-18 11:29) @lasted(23m45s)
-        ☐ Nambahin notif cart
+        X Nambahin notif cart @cancelled(23-04-28 09:33)
 
     10. Checkout:
         ✓ Styling @started(23-04-18 12:10) @done(23-04-18 16:00) @lasted(3h50m21s)
@@ -108,8 +108,8 @@ BukuBook:
     11. Dashboard:
         ✓ Styling @started(23-04-26 09:04) @done(23-04-26 14:33) @lasted(5h29m58s)
         ✓ Navigasi ke profil @done(23-04-27 08:07)
-        ☐ Navigasi ke riwayat 
-        ☐ Navigasi ke contact
+        ✓ Navigasi ke riwayat @done(23-04-28 09:33)
+        X Navigasi ke contact @cancelled(23-04-28 09:33)
         ✓ Log out @done(23-04-26 14:33)
 
     12. Profil:
@@ -119,10 +119,13 @@ BukuBook:
 
     13. Riwayat Pembelian:
         List:
-            ☐ Styling
-            ☐ Pagination
+            ✓ Styling @started(23-04-27 12:46) @done(23-04-27 16:19) @lasted(3h33m41s)
+            ✓ Pagination @done(23-04-28 09:33)
         Detail:
-            ☐ Styling
-        
+            ✓ Styling @done(23-04-27 16:19)
+            ✓ Navigasi dari selesai checkout @done(23-04-28 09:33)
+    
+    X 14. Kontak: @cancelled(23-04-28 08:39) Nunggu https
+        X Styling @cancelled(23-04-28 08:39)
 
 - Sisanya dipikir nanti

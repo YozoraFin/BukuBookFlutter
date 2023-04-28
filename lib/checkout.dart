@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/components/textform.dart';
 import 'package:login_page/constants.dart';
+import 'package:login_page/detailorder.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -40,6 +41,7 @@ class CheckoutState extends State<CheckOut> {
   int _ppn = 0;
   int _total = 0;
   bool _continue = false;
+  bool _checkout = false;
 
   RefreshController _refreshController = RefreshController();
   TextEditingController couponController = TextEditingController();
@@ -496,10 +498,10 @@ class CheckoutState extends State<CheckOut> {
                                     )
                                   ),
                                   onPressed: () {
-                                    if(_continue) {
+                                    if(_continue && !_checkout) {
                                       showDialog(
                                         context: context, 
-                                        builder: (BuildContext context) {
+                                        builder: (BuildContext context2) {
                                           return AlertDialog(
                                             title: const Text('Perhatian!'),
                                             content: Text('Setelah menyetujui anda harus membayar sebesar Rp ${idr.format(_ppn + _total)} kepada kurir. Pastikan barang yang anda beli sudah sesuai agar tidak mengalami kerugian yang tidak diinginkan.'),
@@ -512,6 +514,9 @@ class CheckoutState extends State<CheckOut> {
                                               ),
                                               TextButton(
                                                 onPressed: () {
+                                                  setState(() {
+                                                    _checkout = true;
+                                                  });
                                                   List data = [];
                                                   for (var item in _listItem) {
                                                     data.add({
@@ -539,42 +544,11 @@ class CheckoutState extends State<CheckOut> {
                                                   };
                                                   Dio().post('${Constants.baseUrl}/checkout', data: object  )
                                                   .then((value) {
+                                                    print(value.data);
                                                     if(value.data['status'] == 200) {
-                                                      showDialog(
-                                                        context: context, 
-                                                        builder: (BuildContext context) {
-                                                          return AlertDialog(
-                                                            title: Text('Berhasil melakukan checkout'),
-                                                            content: Text('Kamu bisa melihat pesananmu pada halaman riwayat belanja dalam bagian profil'),
-                                                            actions: [
-                                                              TextButton(
-                                                                onPressed: () {
-                                                                  Navigator.pop(context);
-                                                                }, 
-                                                                child: Text('Oke')
-                                                              ),
-                                                            ],
-                                                          );
-                                                        }
-                                                      );
+                                                      pushNewScreen(context, screen: DetailOrder(id: value.data['OrderID']));
                                                     } else {
-                                                      showDialog(
-                                                        context: context, 
-                                                        builder: (BuildContext context) {
-                                                          return AlertDialog(
-                                                            title: Text('Gagal melanjutkan'),
-                                                            content: Text('${value.data['message']}'),
-                                                            actions: [
-                                                              TextButton(
-                                                                onPressed: () {
-                                                                  Navigator.pop(context);
-                                                                }, 
-                                                                child: Text('Oke')
-                                                              ),
-                                                            ],
-                                                          );
-                                                        }
-                                                      );
+                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Terjadi kesalahan ketika melakukan checkout')));
                                                     }
                                                   });
                                                   Navigator.pop(context);
@@ -585,13 +559,13 @@ class CheckoutState extends State<CheckOut> {
                                           );
                                         }
                                       );
-                                    } else {
+                                    } else if(!_continue) {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(content: Text('Tolong lengkapi data terlebih dahulu!')),
                                       );
                                     }
                                   },
-                                  child: Text('Bayar!'),
+                                  child: _checkout ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white,),) : const Text('Bayar!')
                                 ),
                               ),
                             ),

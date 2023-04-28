@@ -32,6 +32,8 @@ class _HomeBannerState extends State<HomeBanner> {
                 child: CachedNetworkImage(
                   imageUrl: item['SrcBanner'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
                   progressIndicatorBuilder: (context, url, downloadProgress) => Container(
+                    width: 150,
+                    height: 300,
                     child: Center(
                       child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                     ),

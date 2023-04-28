@@ -157,7 +157,7 @@ class _HomeArticleState extends State<HomeArticle> {
               ),
               if(widget.newArticle.length > 2) Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: widget.newArticle.sublist(0, 2).asMap().entries.map((entry) {
+                children: widget.newArticle.sublist(0, 3).asMap().entries.map((entry) {
                   return GestureDetector(
                     onTap: () => _controller.animateToPage(entry.key),
                     child: Container(

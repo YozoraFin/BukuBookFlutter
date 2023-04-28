@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/constants.dart';
+import 'package:login_page/contact.dart';
+import 'package:login_page/historyorder.dart';
 import 'package:login_page/login.dart';
 import 'package:login_page/profil.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -129,24 +131,37 @@ class DashboardState extends State<Dashboard> {
               ),
             ),
             const SizedBox(height: 16,),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: const [
-                  FaIcon(FontAwesomeIcons.clockRotateLeft, size: 20,),
-                  SizedBox(width: 10,),
-                  Text('Riwayat pembelian', style: TextStyle(fontSize: 20),)
-                ],
+            InkWell(
+              onTap: () {
+                pushNewScreen(context, screen: HistoryOrder(), withNavBar: false);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: const [
+                    FaIcon(FontAwesomeIcons.clockRotateLeft, size: 20,),
+                    SizedBox(width: 10,),
+                    Text('Riwayat pembelian', style: TextStyle(fontSize: 20),)
+                  ],
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: const [
-                  FaIcon(FontAwesomeIcons.headset, size: 20,),
-                  SizedBox(width: 10,),
-                  Text('Hubungi kami', style: TextStyle(fontSize: 20),)
-                ],
+            InkWell(
+              onTap: () {
+                // pushNewScreen(context, screen: const Contact(), withNavBar: false);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('WIP'))
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: const [
+                    FaIcon(FontAwesomeIcons.headset, size: 20,),
+                    SizedBox(width: 10,),
+                    Text('Hubungi kami', style: TextStyle(fontSize: 20),)
+                  ],
+                ),
               ),
             ),
             InkWell(
