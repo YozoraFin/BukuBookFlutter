@@ -34,8 +34,8 @@ class _HomeArticleState extends State<HomeArticle> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const[
-                    Text('Artikel terkait', style: TextStyle(color: Color(0xFF777777), fontSize: 16),),
-                    Text('Artikel Terbaru', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),),
+                    Text('Artikel terkait', style: TextStyle(color: Color(0xFF777777), fontSize: 18, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1, height: 1.2),),
+                    Text('Artikel Terbaru', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 32, fontFamily: 'Baskerville', letterSpacing: 1.3, wordSpacing: 1.2, height: 1.3),),
                   ],
                 ),
               ),
@@ -132,20 +132,18 @@ class _HomeArticleState extends State<HomeArticle> {
                           const SizedBox(height: 10,),
                           RichText(text: TextSpan(
                             children: [
-                              TextSpan(text: 'By ${e["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777))),
+                              TextSpan(text: 'By ${e["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5)),
                               const WidgetSpan(child: Padding(
                                 padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                child: Icon(Icons.comment, size: 15, color: Color(0xFF777777),),
+                                child: Icon(Icons.comment, size: 15, color: Color(0xFF777777)),
                               )),
-                              TextSpan(text: '${e["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777)))
+                              TextSpan(text: '${e["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
                             ]
                           )),
                           const SizedBox(height: 10,),
-                          Text(e['Penulis'], style: const TextStyle(color: Color(0xFF384AEB))),
+                          Text(e['Judul'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1, height: 1.2)),
                           const SizedBox(height: 10,),
-                          Text(e['Judul'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 10,),
-                          Text(e['Teaser'], style: const TextStyle(color: Color(0xFF777777)))
+                          Text(e['Teaser'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5, height: 1.2))
                         ],
                       ),
                     ),

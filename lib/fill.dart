@@ -75,12 +75,7 @@ class _FillDataState extends State<FillData> {
                                         const SnackBar(content: Text('Berhasil melengkapi profil'))
                                       ),
                                       box.write('accesstoken', response.data['accesstoken']),
-                                      Navigator.push(
-                                        context, 
-                                        MaterialPageRoute(
-                                          builder: (context) => const BottomNavbar(initial: 0,)
-                                        ),
-                                      )
+                                      Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false)
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(content: Text(response.data['message']))

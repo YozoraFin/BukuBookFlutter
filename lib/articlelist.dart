@@ -129,7 +129,7 @@ class _ArticleListState extends State<ArticleList> {
       appBar: AppBar(
         // backgroundColor: Color(0xFFFAFAFA),
         shadowColor: const Color(0xFFCCE4FF),
-        title: const Text('Daftar Artikel'),
+        title: const Text('Daftar Artikel', style: TextStyle(fontFamily: 'SourceSans', letterSpacing: 0.5, wordSpacing: 1.1),),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
@@ -156,7 +156,7 @@ class _ArticleListState extends State<ArticleList> {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
-                                child: Text('Kategori', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                child: Text('Kategori', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7)),
                               ),
                               const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 16),
@@ -189,7 +189,7 @@ class _ArticleListState extends State<ArticleList> {
                                             });
                                           }
                                         },
-                                        label: Text('${kategori['Kategori']} (${kategori['Total']})', style: TextStyle(fontSize: 16, color: _curKategori == kategori['Kategori'] ? Colors.white : Colors.black),),
+                                        label: Text('${kategori['Kategori']} (${kategori['Total']})', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, fontSize: 16, color: _curKategori == kategori['Kategori'] ? Colors.white : Colors.black),),
                                       ),
                                     ),
                                   ],
@@ -303,18 +303,18 @@ class _ArticleListState extends State<ArticleList> {
                     const SizedBox(height: 10,),
                     RichText(text: TextSpan(
                       children: [
-                        TextSpan(text: 'By ${artikel["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777))),
+                        TextSpan(text: 'By ${artikel["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5)),
                         const WidgetSpan(child: Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                           child: Icon(Icons.comment, size: 15, color: Color(0xFF777777),),
                         )),
-                        TextSpan(text: '${artikel["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777)))
+                        TextSpan(text: '${artikel["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
                       ]
                     )),
                     const SizedBox(height: 10,),
-                    Text(artikel['Judul'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(artikel['Judul'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
                     const SizedBox(height: 10,),
-                    Text(artikel['Teaser'], style: const TextStyle(color: Color(0xFF777777)))
+                    Text(artikel['Teaser'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
                   ],
                 ),
               ),

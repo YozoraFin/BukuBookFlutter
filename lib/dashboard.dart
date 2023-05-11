@@ -112,9 +112,9 @@ class DashboardState extends State<Dashboard> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('${_data['NamaPanggilan']}', style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
+                                Text('${_data['NamaPanggilan']}', style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5, wordSpacing: 1.1),),
                                 const SizedBox(height: 5,),
-                                Text('${_data['Email']}', style: const TextStyle(color: Colors.white),),
+                                Text('${_data['Email']}', style: const TextStyle(color: Colors.white, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                               ],
                             ),
                             const Spacer(),
@@ -138,7 +138,7 @@ class DashboardState extends State<Dashboard> {
                   children: const [
                     FaIcon(FontAwesomeIcons.clockRotateLeft, size: 20,),
                     SizedBox(width: 10,),
-                    Text('Riwayat pembelian', style: TextStyle(fontSize: 20),)
+                    Text('Riwayat pembelian', style: TextStyle(fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1),)
                   ],
                 ),
               ),
@@ -156,7 +156,7 @@ class DashboardState extends State<Dashboard> {
                   children: const [
                     FaIcon(FontAwesomeIcons.headset, size: 20,),
                     SizedBox(width: 10,),
-                    Text('Hubungi kami', style: TextStyle(fontSize: 20),)
+                    Text('Hubungi kami', style: TextStyle(fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1),)
                   ],
                 ),
               ),
@@ -167,22 +167,22 @@ class DashboardState extends State<Dashboard> {
                   context: context, 
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Apakah anda yakin?'),
-                      content: const Text('Setelah ini anda akan diarahkan kembali menuju halaman login'),
+                      title: const Text('Apakah anda yakin?', style: TextStyle(fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1),),
+                      content: const Text('Setelah ini anda akan diarahkan kembali menuju halaman login', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           }, 
-                          child: const Text('Tidak')
+                          child: const Text('Tidak', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                             box.remove('accesstoken');
-                            pushNewScreen(context, screen: const Login(), withNavBar: false);
+                            Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
                           }, 
-                          child: const Text('Ya')
+                          child: const Text('Ya', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5))
                         )
                       ],
                     );
@@ -195,7 +195,7 @@ class DashboardState extends State<Dashboard> {
                   children: const [
                     FaIcon(FontAwesomeIcons.arrowRightFromBracket, size: 20,),
                     SizedBox(width: 10,),
-                    Text('Keluar', style: TextStyle(fontSize: 20),)
+                    Text('Keluar', style: TextStyle(fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1),)
                   ],
                 ),
               ),

@@ -14,6 +14,8 @@ BukuBook:
         ✓ Menambahkan smart refresh untuk setiap halaman @done(23-04-28 09:34)
         ✓ Menambahkan skeleton untuk setiap halaman @done(23-04-28 09:34)
         ☐ Mengganti primary color
+        ✓ Typography @started(23-05-09 09:00) @done(23-05-09 12:49) @lasted(3h49m53s)
+        ☐ Menghapus font tidak terpakai
 
     2. Login: 
         ✓ Styling @done(23-04-14 08:20)
@@ -71,6 +73,7 @@ BukuBook:
             ✓ Handle jumlah @done(23-04-14 08:45)
             ✓ Menambahkan buku ke keranjang (Tunggu selesai membuat halaman cart) @started(23-04-17 15:02) @done(23-04-17 15:31) @lasted(29m53s)
             ✓ Handle sampul > 1 @started(23-04-17 10:10) @done(23-04-17 10:32) @lasted(22m31s)
+            ☐ Nambain cart button di appbar
         Katalog:
             ✓ Styling @started(23-04-14 08:50) @done(23-04-14 11:46) @lasted(2h56m36s)
             ✓ Navigasi ke halaman detail @started(23-04-14 12:31) @done(23-04-14 12:39) @lasted(8m18s)
@@ -96,6 +99,7 @@ BukuBook:
         ✓ Handle refresh setelah navigasi @started(23-04-18 08:32) @done(23-04-18 10:50) @lasted(2h18m3s)
         ✓ Handle stok habis @started(23-04-18 11:06) @done(23-04-18 11:29) @lasted(23m45s)
         X Nambahin notif cart @cancelled(23-04-28 09:33)
+        ☐ Benerin style buat subtotal
 
     10. Checkout:
         ✓ Styling @started(23-04-18 12:10) @done(23-04-18 16:00) @lasted(3h50m21s)
@@ -124,6 +128,7 @@ BukuBook:
         Detail:
             ✓ Styling @done(23-04-27 16:19)
             ✓ Navigasi dari selesai checkout @done(23-04-28 09:33)
+            ✓ Benerin navigasi di back dulu terus baru di push push push @done(23-04-28 16:22)
     
     X 14. Kontak: @cancelled(23-04-28 08:39) Nunggu https
         X Styling @cancelled(23-04-28 08:39)

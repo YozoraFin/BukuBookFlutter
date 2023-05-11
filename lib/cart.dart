@@ -372,8 +372,16 @@ class CartState extends State<Cart> {
                     Text('Subtotal: Rp ${idr.format(_subTotal)}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                     const Spacer(),
                     ElevatedButton(
+                      style: ButtonStyle(
+                        shadowColor: MaterialStateProperty.all(Colors.transparent),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          )
+                        )
+                      ),
                       onPressed: () {
-                        if(checkStok() && _total < 50) {
+                        if(checkStok() && _total < 50 && _total != 0) {
                           pushNewScreen(context, screen: const CheckOut(), withNavBar: false);
                         } else {
                           if(!checkStok()) {
@@ -383,6 +391,24 @@ class CartState extends State<Cart> {
                                 return AlertDialog(
                                   title: const Text('Stok habis!'),
                                   content: const Text('Salah satu dari barang yang ingin anda beli telah kehabisan stok, tolong hapus terlebih dahulu agar bisa melanjutkan pembayaran'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      }, 
+                                      child: const Text('Ok')
+                                    )
+                                  ],
+                                );
+                              }
+                            );
+                          } else if(_total == 0) {
+                            showDialog(
+                              context: context, 
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Keranjang kosong!'),
+                                  content: const Text('Ayo masukkan barang terlebih dahulu agar bisa melakukan checkout'),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
@@ -415,8 +441,78 @@ class CartState extends State<Cart> {
                           }
                         }
                       }, 
-                      child: const Text('Bayar!')
-                    )
+                      child: Row(
+                        children: const [
+                          Text('Bayar', style: TextStyle(fontSize: 20)),
+                          SizedBox(width: 10),
+                          FaIcon(FontAwesomeIcons.chevronRight, size: 20)
+                        ],
+                      )
+                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     if(checkStok() && _total < 50 && _total != 0) {
+                    //       pushNewScreen(context, screen: const CheckOut(), withNavBar: false);
+                    //     } else {
+                    //       if(!checkStok()) {
+                    //         showDialog(
+                    //           context: context, 
+                    //           builder: (BuildContext context) {
+                    //             return AlertDialog(
+                    //               title: const Text('Stok habis!'),
+                    //               content: const Text('Salah satu dari barang yang ingin anda beli telah kehabisan stok, tolong hapus terlebih dahulu agar bisa melanjutkan pembayaran'),
+                    //               actions: [
+                    //                 TextButton(
+                    //                   onPressed: () {
+                    //                     Navigator.pop(context);
+                    //                   }, 
+                    //                   child: const Text('Ok')
+                    //                 )
+                    //               ],
+                    //             );
+                    //           }
+                    //         );
+                    //       } else if(_total == 0) {
+                    //         showDialog(
+                    //           context: context, 
+                    //           builder: (BuildContext context) {
+                    //             return AlertDialog(
+                    //               title: const Text('Keranjang kosong!'),
+                    //               content: const Text('Ayo masukkan barang terlebih dahulu agar bisa melakukan checkout'),
+                    //               actions: [
+                    //                 TextButton(
+                    //                   onPressed: () {
+                    //                     Navigator.pop(context);
+                    //                   }, 
+                    //                   child: const Text('Ok')
+                    //                 )
+                    //               ],
+                    //             );
+                    //           }
+                    //         );
+                    //       } else {
+                    //         showDialog(
+                    //           context: context, 
+                    //           builder: (BuildContext context) {
+                    //             return AlertDialog(
+                    //               title: const Text('Barang kelebihan!'),
+                    //               content: const Text('Tolong pastikan jumlah barang yang anda beli tidak melebihi 50'),
+                    //               actions: [
+                    //                 TextButton(
+                    //                   onPressed: () {
+                    //                     Navigator.pop(context);
+                    //                   }, 
+                    //                   child: const Text('Ok')
+                    //                 )
+                    //               ],
+                    //             );
+                    //           }
+                    //         );
+                    //       }
+                    //     }
+                    //   }, 
+                    //   child: const Text('Bayar!', style: TextStyle(fontSize: 18),)
+                    // )
                   ],
                 ),
               ),

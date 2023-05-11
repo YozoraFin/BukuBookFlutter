@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:login_page/bottomnavbar.dart';
+import 'package:login_page/cart.dart';
 import 'package:login_page/constants.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -60,6 +64,14 @@ class _DetailBookState extends State<DetailBook> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
+        actions: [
+          IconButton(
+            onPressed: () {
+              pushNewScreen(context, screen: const Cart());
+            }, 
+            icon: const Icon(CupertinoIcons.cart)
+          )
+        ],
       ),
       body: SmartRefresher(
         controller: _refreshController,
@@ -109,7 +121,7 @@ class _DetailBookState extends State<DetailBook> {
             ),
             const SizedBox(height: 32),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: _loading
               ? const SkeletonLine(
                 style: SkeletonLineStyle(
@@ -117,10 +129,10 @@ class _DetailBookState extends State<DetailBook> {
                   height: 25,
                 ),
               )
-              : Text('${_detailbook["Judul"]}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+              : Text('${_detailbook["Judul"]}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25, fontFamily: 'Baskerville', letterSpacing: 0.7, wordSpacing: 1.1)),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: _loading
               ? const SkeletonLine(
                 style: SkeletonLineStyle(
@@ -128,7 +140,7 @@ class _DetailBookState extends State<DetailBook> {
                   height: 28,
                 ),
               )
-              : Text('Rp ${idr.format(_detailbook["Harga"])}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color: Color(0xFF384AEB))),
+              : Text('Rp ${idr.format(_detailbook["Harga"])}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color: Color(0xFF384AEB), fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -156,7 +168,7 @@ class _DetailBookState extends State<DetailBook> {
                                       padding: EdgeInsets.only(bottom: 5)
                                     ),
                                   )
-                                  : const Text('Genre', style: TextStyle(fontSize: 18)),
+                                  : const Text('Genre', style: TextStyle(fontSize: 18, fontFamily: 'OpenSans', letterSpacing: 0.5)),
                                   _loading
                                   ? const SkeletonLine(
                                     style: SkeletonLineStyle(
@@ -164,7 +176,7 @@ class _DetailBookState extends State<DetailBook> {
                                       height: 18,
                                     ),
                                   )
-                                  : const Text('Stok', style: TextStyle(fontSize: 18)),
+                                  : const Text('Stok', style: TextStyle(fontSize: 18, fontFamily: 'OpenSans', letterSpacing: 0.5)),
                                   // Text('Jumlah', style: TextStyle(fontSize: 18))
                                 ],
                               ),
@@ -183,7 +195,7 @@ class _DetailBookState extends State<DetailBook> {
                                       padding: EdgeInsets.only(bottom: 5)
                                     ),
                                   )
-                                  : Text(': ${_detailbook["Genre"]["Genre"]}', style: const TextStyle(color: Color(0xFF384AEB), fontSize: 18),),
+                                  : Text(': ${_detailbook["Genre"]["Genre"]}', style: const TextStyle(color: Color(0xFF384AEB), fontSize: 18, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                                   _loading
                                   ? const SkeletonLine(
                                     style: SkeletonLineStyle(
@@ -191,7 +203,7 @@ class _DetailBookState extends State<DetailBook> {
                                       height: 18,
                                     ),
                                   )
-                                  : Text(': ${_detailbook["Stok"]}', style: const TextStyle(fontSize: 18)),
+                                  : Text(': ${_detailbook["Stok"]}', style: const TextStyle(fontSize: 18, fontFamily: 'OpenSans', letterSpacing: 0.5)),
                                 ],
                               ),
                             )
@@ -244,7 +256,7 @@ class _DetailBookState extends State<DetailBook> {
                                       Row(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                                             child: Center(
                                               child: CachedNetworkImage(
                                                 imageUrl: _detailbook['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
@@ -262,8 +274,8 @@ class _DetailBookState extends State<DetailBook> {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text('${_detailbook['Judul']}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                              Text('Rp ${idr.format(_detailbook["Harga"])}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF384AEB))),
+                                              Text('${_detailbook['Judul']}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, fontFamily: 'Baskerviller', height: 1.2, letterSpacing: 0.7)),
+                                              Text('Rp ${idr.format(_detailbook["Harga"])}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF384AEB), fontFamily: 'SourceSans', height: 1.2, letterSpacing: 0.7)),
                                               Row(
                                                 children: [
                                                   IconButton(
@@ -281,7 +293,7 @@ class _DetailBookState extends State<DetailBook> {
                                                     }, 
                                                     icon: const Icon(Icons.remove, color: Color(0xFF384AEB),)
                                                   ),
-                                                  Text('$_jumlah'),
+                                                  Text('$_jumlah', style: const TextStyle(fontFamily: 'OpenSans'),),
                                                   IconButton(
                                                     splashRadius: 24,
                                                     onPressed: () {
@@ -339,7 +351,7 @@ class _DetailBookState extends State<DetailBook> {
                                                 });    
                                               }    
                                             }, 
-                                            child: const Text('Tambahkan ke Keranjang') 
+                                            child: const Text('Tambahkan ke Keranjang', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),) 
                                           ),
                                         ),
                                       )
@@ -366,7 +378,7 @@ class _DetailBookState extends State<DetailBook> {
                   height: 20,
                 ),
               )
-              : const Text('Sinopsis :', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              : const Text('Sinopsis :', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.7, height: 1.2)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -388,7 +400,10 @@ class _DetailBookState extends State<DetailBook> {
                   style: {
                     '*': Style(
                       padding: EdgeInsets.zero,
-                      margin: EdgeInsets.zero
+                      margin: EdgeInsets.zero,
+                      fontFamily: 'OpenSans',
+                      letterSpacing: 0.5,
+                      lineHeight: LineHeight.percent(120)
                     )
                   },
                 )

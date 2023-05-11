@@ -69,7 +69,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           shadowColor: Colors.transparent,
-          title: Text('${_detailArticle['Judul']}'),
+          title: Text('${_detailArticle['Judul']}', style: const TextStyle(fontFamily: 'SourceSans', letterSpacing: 0.5),),
         ),
         body: SmartRefresher(
           controller: _refreshController,
@@ -119,13 +119,13 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 )
                 : GestureDetector(
                   onTap: () {
-                    pushNewScreen(context, screen: BottomNavbar(initial: 3, kategori: _detailArticle['Kategori'],));
+                    pushNewScreen(context, screen: BottomNavbar(initial: 1, kategori: _detailArticle['Kategori'],));
                   },
                   child: Row(
                     children: [
                       const Icon(Icons.category),
                       const SizedBox(width: 5,),
-                      Text(_detailArticle['Kategori'], style: const TextStyle(color: Color(0xFF777777)))
+                      Text(_detailArticle['Kategori'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
                     ],
                   ),
                 ),
@@ -143,7 +143,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   children: [
                     const Icon(Icons.person),
                     const SizedBox(width: 5,),
-                    Text(_detailArticle['Penulis'], style: const TextStyle(color: Color(0xFF777777)))
+                    Text(_detailArticle['Penulis'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
                   ],
                 ),
               ),
@@ -160,7 +160,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   children: [
                     const Icon(Icons.calendar_month),
                     const SizedBox(width: 5,),
-                    Text(_detailArticle['Tanggal'], style: const TextStyle(color: Color(0xFF777777)))
+                    Text(_detailArticle['Tanggal'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
                   ],
                 ),
               ),
@@ -177,7 +177,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   children: [
                     const Icon(Icons.chat_bubble),
                     const SizedBox(width: 5,),
-                    Text('${_detailArticle['JumlahKomen']} Komentar', style: const TextStyle(color: Color(0xFF777777)))
+                    Text('${_detailArticle['JumlahKomen']} Komentar', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
                   ],
                 ),
               ),
@@ -191,7 +191,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     height: 25,
                   ),
                 )
-                : Text(_detailArticle['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                : Text(_detailArticle['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.2, height: 1.2),),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
@@ -213,7 +213,10 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   style: {
                     '*': Style(
                       padding: EdgeInsets.zero,
-                      margin: EdgeInsets.zero
+                      margin: EdgeInsets.zero,
+                      fontFamily: 'OpenSans',
+                      letterSpacing: 0.5,
+                      lineHeight: LineHeight.percent(120)
                     )
                   },
                 ),
@@ -227,7 +230,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     height: 25,
                   ),
                 )
-                : const Text('Artikel Lainnya', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                : const Text('Artikel Lainnya', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.2),),
               ),
               _detailArticle['Prev']['id'] != 0 ? GestureDetector(     
                 onTap: () {
@@ -272,7 +275,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                           )
                         )
                       )
-                      : Text(_detailArticle['Prev']['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)
+                      : Text(_detailArticle['Prev']['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                     ],
                   ),
                 ),
@@ -320,7 +323,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                           )
                         )
                       )
-                      : Text(_detailArticle['Next']['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)
+                      : Text(_detailArticle['Next']['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                     ],
                   ),
                 ),
@@ -338,7 +341,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     height: 25,
                   ),
                 )
-                : const Text('Komentar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                : const Text('Komentar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.2)),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -354,10 +357,15 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   minLines: 6,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
+                  style: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    letterSpacing: 0.5
+                  ),
                   decoration: const InputDecoration(
                     alignLabelWithHint: true,
                     border: OutlineInputBorder(),
-                    labelText: 'Komentar'
+                    labelText: 'Komentar',
+                    labelStyle: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)
                   ),
                 ),
               ),
@@ -377,7 +385,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     onPressed: () {
                       if(komentarController.text == '') {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Komentar tidak boleh kosong!')),
+                          const SnackBar(content: Text('Komentar tidak boleh kosong!', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),)),
                         );
                       } else {
                         Dio().post('${Constants.baseUrl}/komentar/send', data: {'AksesToken': box.read('accesstoken'), 'ArticleID': widget.id, 'Komentar': komentarController.text})
@@ -405,7 +413,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       alignment: Alignment.center
                     ),
                   )
-                  : Text('${_detailArticle['JumlahKomen']} Komentar', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  : Text('${_detailArticle['JumlahKomen']} Komentar', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.6, wordSpacing: 1.1),),
                 ),
               ),
               Padding(
@@ -502,11 +510,11 @@ class _ArticleDetailState extends State<ArticleDetail> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(komentar['Customer']['NamaLengkap'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                  Text(komentar['Customer']['NamaLengkap'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, fontFamily: 'SourceSans', letterSpacing: 0.5, wordSpacing: 1.1)),
                                   const SizedBox(height: 7),
-                                  Text(komentar['Tanggal'], style: const TextStyle(color: Color(0xFF777777)),),
+                                  Text(komentar['Tanggal'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5, wordSpacing: 1.1),),
                                   const SizedBox(height: 10),
-                                  Text(komentar['Komentar'], style: const TextStyle(color: Color(0xFF555555), height: 1.5, letterSpacing: 0.8),)
+                                  Text(komentar['Komentar'], style: const TextStyle(color: Color(0xFF555555), height: 1.5, letterSpacing: 0.5, fontFamily: 'OpenSans'),)
                                 ],
                               ),
                             )

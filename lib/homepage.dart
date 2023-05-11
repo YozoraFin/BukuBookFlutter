@@ -1,12 +1,17 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:login_page/bestbook.dart';
+import 'package:login_page/cart.dart';
 import 'package:login_page/constants.dart';
 import 'package:login_page/homearticle.dart';
 import 'package:login_page/homebanner.dart';
 import 'package:login_page/homecoupon.dart';
+import 'package:login_page/katalog.dart';
 import 'package:login_page/popularbook.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -18,6 +23,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  GlobalKey<KatalogState> katalogKey = GlobalKey<KatalogState>();
+  GlobalKey<CartState> cartKey = GlobalKey<CartState>();
   final box = GetStorage();
   bool _loadingPopular = true;
   bool _loadingBest = true;
@@ -90,7 +97,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   getCoupon() {
-    Dio().get('${Constants.baseUrl}/kupon').then((value) {
+    Dio().post('${Constants.baseUrl}/kupon/get', data: {'AksesToken': box.read('accesstoken')}).then((value) {
       setState(() {
         _coupon = value.data['hData'];
         _loadingCoupon = false;
@@ -101,10 +108,70 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            Expanded(
+              flex: 4,
+              child: Row(
+                children: const [
+                  FaIcon(FontAwesomeIcons.book, color: Colors.blue,),
+                  Text(' BukuBook', style: TextStyle(color: Colors.black, fontFamily: 'Baskerville', fontSize: 18, fontWeight: FontWeight.w700, letterSpacing: 0.5),)
+                ],
+              ),
+            ),
+            const Spacer(),
+            Expanded(
+              flex: 5,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: SizedBox(
+                      height: 35,
+                      child: GestureDetector(
+                        onTap: () {
+                          katalogKey.currentState?.setFocus();
+                          pushNewScreen(context, screen: Katalog(key: katalogKey,), withNavBar: false).then((value) => FocusManager.instance.primaryFocus?.unfocus());
+                        },
+                        child: TextFormField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            fillColor:const Color(0xFFFAFAFA),
+                            filled: true,
+                            suffixIcon: const Icon(Icons.search),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            hintText: 'Cari...',
+                            hintStyle: const TextStyle(
+                              fontFamily: 'OpenSans',
+                              letterSpacing: 0.5
+                            ),
+                            contentPadding: const EdgeInsets.only(left: 10)
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: IconButton(
+                      onPressed: () {
+                        cartKey.currentState?.getCart();
+                        pushNewScreen(context, screen: Cart(key: cartKey,), withNavBar: false);
+                      },
+                      icon: const Icon(CupertinoIcons.cart), 
+                      color: Colors.blue,
+                    )
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
       body: SmartRefresher(
         controller: _refreshController,
@@ -121,7 +188,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 48, width: double.infinity),
+              const SizedBox(height: 20, width: double.infinity),
               _loadingBanner 
               ? const SkeletonLine(
                 style: SkeletonLineStyle(

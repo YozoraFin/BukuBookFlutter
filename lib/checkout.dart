@@ -3,9 +3,11 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:login_page/bottomnavbar.dart';
 import 'package:login_page/components/textform.dart';
 import 'package:login_page/constants.dart';
 import 'package:login_page/detailorder.dart';
+import 'package:login_page/historyorder.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:skeletons/skeletons.dart';
@@ -41,6 +43,7 @@ class CheckoutState extends State<CheckOut> {
   int _total = 0;
   bool _continue = false;
   bool _checkout = false;
+  int _kupon = 0;
 
   final RefreshController _refreshController = RefreshController();
   TextEditingController couponController = TextEditingController();
@@ -166,10 +169,11 @@ class CheckoutState extends State<CheckOut> {
                           )
                         ),
                         onPressed: () {
-                          Dio().post('${Constants.baseUrl}/kupon/check', data: {'Kode': couponController.text})
+                          Dio().post('${Constants.baseUrl}/kupon/check', data: {'Kode': couponController.text, 'AksesToken': box.read('accesstoken'), 'Subtotal': _subtotal})
                           .then((value) {
                             setState(() {
                               if(value.data['status'] == 200) {
+                                _kupon = value.data['data']['id'];
                                 if(value.data['data']['Tipe']) {
                                   _potongan = _subtotal*value.data['data']['Potongan']~/100.toInt();
                                   _ppn = _ppn - _subtotal*value.data['data']['Potongan']~/100.toInt()*11~/100.toInt();
@@ -184,7 +188,7 @@ class CheckoutState extends State<CheckOut> {
                                 );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Kode kupon tidak ditemukan')),
+                                  SnackBar(content: Text('${value.data['message']}')),
                                 );
                               }
                             });
@@ -272,7 +276,6 @@ class CheckoutState extends State<CheckOut> {
                             ),
                           ),
                           TextFormRoundBB(controller: alamatController, placeholder: 'Alamat', pHorizontal: 0, pVertical: 8, cVertical: 10, lines: null,),
-                          TextFormRoundBB(controller: kodePosController, placeholder: 'Kode Pos', pHorizontal: 0, pVertical: 8, cVertical: 10, keyboardType: TextInputType.number,),
                           IgnorePointer(
                             ignoring: _selectedKota['id'] == '',
                             child: Opacity(
@@ -349,6 +352,7 @@ class CheckoutState extends State<CheckOut> {
                                                     children: [
                                                       for(var layanan in snapshot.data!.data['data']) ListTile(
                                                         onTap: () {
+                                                          checkForm();
                                                           setOngkir(layanan['harga']);
                                                           Navigator.pop(context);
                                                         },
@@ -369,6 +373,7 @@ class CheckoutState extends State<CheckOut> {
                               ),
                             ),
                           ),
+                          TextFormRoundBB(controller: kodePosController, placeholder: 'Kode Pos', pHorizontal: 0, pVertical: 8, cVertical: 10, keyboardType: TextInputType.number,),
                           TextFormRoundBB(controller: catatanController, placeholder: 'Catatan', pHorizontal: 0, pVertical: 8, cVertical: 10, lines: null, action: TextInputAction.newline, keyboardType: TextInputType.multiline,),
                           const SizedBox(height: 30,),
                           const Padding(
@@ -528,7 +533,7 @@ class CheckoutState extends State<CheckOut> {
                                                     'Kurir': _selectedKurir,
                                                     'Provinsi': _selectedProvinsi['provinsi'],
                                                     'Kota': _selectedKota['kota'],
-                                                    'Total': _total,
+                                                    'Total': _total+_ppn,
                                                     'Data': data,
                                                     'Ongkir': _ongkir,
                                                     'Alamat': alamatController.text,
@@ -538,11 +543,17 @@ class CheckoutState extends State<CheckOut> {
                                                     'Kodepos': kodePosController.text,
                                                     'Nama': namaLengkapController.text,
                                                     'Potongan': _potongan,
-                                                    'PPN': _ppn
+                                                    'PPN': _ppn,
+                                                    'Kupon': _kupon
                                                   };
                                                   Dio().post('${Constants.baseUrl}/checkout', data: object  )
                                                   .then((value) {
                                                     if(value.data['status'] == 200) {
+                                                      Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
+                                                      Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                                                        builder: (context) => const BottomNavbar(initial: 2,)
+                                                      ));
+                                                      pushNewScreen(context, screen: const HistoryOrder());
                                                       pushNewScreen(context, screen: DetailOrder(id: value.data['OrderID']));
                                                     } else {
                                                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Terjadi kesalahan ketika melakukan checkout')));

@@ -82,7 +82,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Riwayat Pembelian'),
+        title: const Text('Riwayat Pembelian', style: TextStyle(fontFamily: 'SourceSans', letterSpacing: 0.5, wordSpacing: 1.1),),
       ),
       body: SmartRefresher(
         controller: _refreshController,
@@ -155,18 +155,18 @@ class _HistoryOrderState extends State<HistoryOrder> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(data['Invoice'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(data['Invoice'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, fontFamily: 'SourceSans', letterSpacing: 0.7),),
                         const SizedBox(height: 10,),
-                        Text(data['Tanggal'], style: const TextStyle(fontSize: 16, color: Colors.grey),)
+                        Text(data['Tanggal'], style: const TextStyle(fontSize: 16, color: Colors.grey, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                       ],
                     ),
                     const Spacer(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Text('Total Harga', style: TextStyle(fontSize: 16),),
+                        const Text('Total Harga', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         const SizedBox(height: 10,),
-                        Text('Rp ${idr.format(data['Total'])}', style: const TextStyle(fontSize: 18, color: Colors.blue),)
+                        Text('Rp ${idr.format(data['Total'])}', style: const TextStyle(fontSize: 18, color: Colors.blue, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1),)
                       ],
                     )
                   ],

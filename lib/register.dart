@@ -49,12 +49,13 @@ class _RegisterState extends State<Register> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                        child: Text('Register BukuBook', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+                        child: Text('Register BukuBook', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50, fontFamily: 'Baskerville', letterSpacing: 1.2)),
                       ),
                       TextFormRoundBB(
                         controller: noTelpController,
                         placeholder: 'Nomor Telephone',
                         hidePassword: false,
+                        keyboardType: TextInputType.phone,
                       ),
                       TextFormRoundBB(
                         controller: confirmPasswordController,
@@ -79,7 +80,7 @@ class _RegisterState extends State<Register> {
                                     .then((response) => {
                                       if(response.data['status'] == 200) {
                                         ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(content: Text('Kode OTP terkirim'))
+                                          const SnackBar(content: Text('Kode OTP terkirim', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                                         ),
                                         Navigator.push(
                                           context, 
@@ -89,18 +90,18 @@ class _RegisterState extends State<Register> {
                                         )
                                       } else {
                                         ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text(response.data['message']))
+                                          SnackBar(content: Text(response.data['message'], style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                                         )
                                       },
                                     });
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Konfirmasi password tidak sesuai'))
+                                      const SnackBar(content: Text('Konfirmasi password tidak sesuai', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                                     );
                                   }
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Tolong lengkapi form'))
+                                    const SnackBar(content: Text('Tolong lengkapi form', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                                   );
                                 }
                             },
@@ -110,7 +111,7 @@ class _RegisterState extends State<Register> {
                               ),
                               backgroundColor: Colors.blue
                             ),
-                            child: const Text('Register'),
+                            child: const Text('Register', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)),
                           ),
                         ),
                       ),
@@ -118,6 +119,7 @@ class _RegisterState extends State<Register> {
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                         child: RichText(
                           text: TextSpan(
+                            style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),
                             children: [
                               const TextSpan(text: 'Sudah mempunyai akun? ', style: TextStyle(color: Colors.black)),
                               TextSpan(

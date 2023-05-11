@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/constants.dart';
 import 'package:skeletons/skeletons.dart';
@@ -113,7 +114,15 @@ class _CouponDetailState extends State<CouponDetail> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: _loading
                   ? const SkeletonLine(style: SkeletonLineStyle(height: 14, width: 140, padding: EdgeInsets.only(bottom: 15)),)
-                  : Text(_couponDetail['Deskripsi'], style: const TextStyle(fontSize: 14)),
+                  : Html(
+                    data: _couponDetail['Deskripsi'],
+                    style: {
+                      '*': Style(
+                        padding: EdgeInsets.zero,
+                        margin: EdgeInsets.zero
+                      )
+                    },
+                  )
                 )
               ],
             ),

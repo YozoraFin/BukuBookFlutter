@@ -65,11 +65,11 @@ class _OtpState extends State<Otp> {
                 children: [
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 16),
-                    child: Text('Verifikasi OTP', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+                    child: Text('Verifikasi OTP', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
-                    child: Text('Kode OTP telah kami kirim kan ke nomor ${widget.telp}'),
+                    child: Text('Kode OTP telah kami kirim kan ke nomor ${widget.telp}', style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
@@ -82,14 +82,14 @@ class _OtpState extends State<Otp> {
                         .then((response) => {
                           if(response.data['status'] == 200) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Terverifikasi'))
+                              const SnackBar(content: Text('Terverifikasi', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                             ),
                             // Ini buat register
                             Dio().post('${Constants.baseUrl}/customer/register', data: {'NoTelp': widget.telp, 'Password': widget.password, 'Email': '', 'NamaPanggilan': '', 'NamaLengkap': '', 'Alamat': ''})
                             .then((response) => {
                               if(response.data['status'] == 200) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Register berhasil'))
+                                  const SnackBar(content: Text('Register berhasil', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                                 ),
                                 Navigator.push(
                                   context, 
@@ -99,13 +99,13 @@ class _OtpState extends State<Otp> {
                                 )
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(response.data['message']))
+                                  SnackBar(content: Text(response.data['message'], style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                                 )
                               },
                             })
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(response.data['message']))
+                              SnackBar(content: Text(response.data['message'], style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                             )
                           },
                         });
@@ -118,6 +118,7 @@ class _OtpState extends State<Otp> {
                       alignment: Alignment.bottomRight,
                       child: RichText(
                         text: TextSpan(
+                          style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),
                           children: [
                             const TextSpan(
                               text: 'Belum menerima kode OTP? ',

@@ -32,10 +32,8 @@ class BottomNavbarState extends State<BottomNavbar> {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      const Katalog(),
-      const Dashboard(),
       ArticleList(sKategori: widget.kategori,),
-      Cart(key: cartKey,),
+      const Dashboard(),
     ];
   }
 
@@ -47,21 +45,6 @@ class BottomNavbarState extends State<BottomNavbar> {
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.inactiveGray
       ),
-
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.book),
-        title: 'Katalog',
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.inactiveGray
-      ),
-      
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.person),
-        title: 'Akun',
-        activeColorPrimary: CupertinoColors.activeBlue,
-        activeColorSecondary: CupertinoColors.white,
-        inactiveColorPrimary: CupertinoColors.inactiveGray,
-      ),
       
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.news),
@@ -71,14 +54,10 @@ class BottomNavbarState extends State<BottomNavbar> {
       ),
 
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.cart),
-        title: 'Keranjang',
+        icon: const Icon(CupertinoIcons.person),
+        title: 'Akun',
         activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.inactiveGray,
-        onPressed: (context) {
-          cartKey.currentState?.getCart();
-          _controller.jumpToTab(4);
-        }
+        inactiveColorPrimary: CupertinoColors.inactiveGray
       ),
     ];
   }
@@ -119,7 +98,7 @@ class BottomNavbarState extends State<BottomNavbar> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200)
       ),
-      navBarStyle: NavBarStyle.style15,
+      navBarStyle: NavBarStyle.style1,
     );
   }
 }

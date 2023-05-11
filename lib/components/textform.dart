@@ -21,12 +21,20 @@ class TextFormRoundBB extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: pHorizontal, vertical: pVertical),
       child: TextFormField(
+        style: const TextStyle(
+          fontFamily: 'OpenSans',
+          letterSpacing: 0.5
+        ),
         textInputAction: action,
         keyboardType: keyboardType,
         maxLines: lines,
         obscureText: hidePassword,
         controller: controller,
         decoration: InputDecoration(
+          labelStyle: const TextStyle(
+            fontFamily: 'OpenSans',
+            letterSpacing: 0.5
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50.0)
           ), 

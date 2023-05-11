@@ -57,13 +57,13 @@ class _LoginState extends State<Login> {
                 children: [
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: Text('Login BukuBook', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+                    child: Text('Login BukuBook', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50, fontFamily: 'Baskerville', letterSpacing: 1.2)),
                   ),
                   TextFormRoundBB(
                     controller: telpController,
                     placeholder: 'Nomor Telephone',
                     hidePassword: false,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.phone,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -85,14 +85,14 @@ class _LoginState extends State<Login> {
                                 )
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Login gagal'))
+                                  SnackBar(content: Text(response.data['message'], style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                                 )
                               },
                               submitted(),
                             });
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Please fill input'))
+                              const SnackBar(content: Text('Tolong diisi', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),))
                             );
                           }
                         },
@@ -103,7 +103,7 @@ class _LoginState extends State<Login> {
                             )
                           )
                         ),
-                        child: Text(_button),
+                        child: Text(_button, style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)),
                       ),
                     ),
                   ),
@@ -111,6 +111,10 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: RichText(
                       text: TextSpan(
+                        style: const TextStyle(
+                          fontFamily: 'OpenSans',
+                          letterSpacing: 0.5
+                        ),
                         children: [
                           const TextSpan(text: 'Belum mempunyai akun? ', style: TextStyle(color: Colors.black)),
                           TextSpan(

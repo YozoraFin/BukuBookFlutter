@@ -13,10 +13,10 @@ class Katalog extends StatefulWidget {
   const Katalog({super.key});
 
   @override
-  State<Katalog> createState() => _KatalogState();
+  State<Katalog> createState() => KatalogState();
 }
 
-class _KatalogState extends State<Katalog> {
+class KatalogState extends State<Katalog> {
   List _bukuList = [];
   List _bukuData = [];
   bool _loading = true;
@@ -24,7 +24,7 @@ class _KatalogState extends State<Katalog> {
   bool _loadingGenre = true;
   int _offset = 10;
   bool _continue = true;
-
+  final FocusNode searchFocusNode = FocusNode();
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
   TextEditingController keywordController = TextEditingController();
   final _scrollController = ScrollController();
@@ -74,6 +74,12 @@ class _KatalogState extends State<Katalog> {
         }
       }
     }
+  }
+
+  setFocus() {
+    Future.delayed(const Duration(seconds: 1000),(){
+      searchFocusNode.requestFocus();
+    });
   }
 
   getGenre() {
@@ -149,6 +155,7 @@ class _KatalogState extends State<Katalog> {
                   child: SizedBox(
                     height: 35,
                     child: TextFormField(
+                      focusNode: searchFocusNode,
                       onFieldSubmitted: (val) {
                         setState(() {
                           _keyword = keywordController.text;
@@ -156,6 +163,10 @@ class _KatalogState extends State<Katalog> {
                         getBuku();
                       },
                       controller: keywordController,
+                      style: const TextStyle(
+                        fontFamily: 'OpenSans',
+                        letterSpacing: 0.5
+                      ),
                       decoration: InputDecoration(
                         fillColor:const Color(0xFFFAFAFA),
                         filled: true,
@@ -173,6 +184,10 @@ class _KatalogState extends State<Katalog> {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         hintText: 'Cari...',
+                        hintStyle: const TextStyle(
+                          fontFamily: 'OpenSans',
+                          letterSpacing: 0.5
+                        ),
                         contentPadding: const EdgeInsets.only(left: 10)
                       ),
                     ),
@@ -208,7 +223,7 @@ class _KatalogState extends State<Katalog> {
                                         children: [
                                           Row(
                                             children: [
-                                              const Text('Filter', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                                              const Text('Filter', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, fontFamily: 'SourceSans', letterSpacing: 0.7)),
                                               const SizedBox(width: 10,),
                                               if(_genre != '' || _sort != '' || _min != '' || _max != '' || !_hideEmpty) GestureDetector(onTap: () => clearFilter(setState), child: const FaIcon(FontAwesomeIcons.filterCircleXmark, size: 20,),),
                                               const Spacer(),
@@ -219,7 +234,7 @@ class _KatalogState extends State<Katalog> {
                                             ],
                                           ),
                                           const SizedBox(height: 25,),
-                                          const Text('Urutkan dari: ', style: TextStyle(fontSize: 18),),
+                                          const Text('Urutkan dari: ', style: TextStyle(fontSize: 18, fontFamily: 'SourceSans', letterSpacing: 0.5),),
                                           const SizedBox(height: 15,),
                                           Wrap(
                                             spacing: 8,
@@ -248,7 +263,7 @@ class _KatalogState extends State<Katalog> {
                                                     } 
                                                     getBuku();
                                                   },
-                                                  label: Text('A-Z', style: TextStyle(color: 'asc' == _sort ? Colors.white : Colors.black),),
+                                                  label: Text('A-Z', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, color: 'asc' == _sort ? Colors.white : Colors.black),),
                                                 ),
                                               ),
                                               Padding(
@@ -275,7 +290,7 @@ class _KatalogState extends State<Katalog> {
                                                     } 
                                                     getBuku();
                                                   },
-                                                  label: Text('Z-A', style: TextStyle(color: 'desc' == _sort ? Colors.white : Colors.black),),
+                                                  label: Text('Z-A', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, color: 'desc' == _sort ? Colors.white : Colors.black),),
                                                 ),
                                               ),
                                               Padding(
@@ -302,7 +317,7 @@ class _KatalogState extends State<Katalog> {
                                                     } 
                                                     getBuku();
                                                   },
-                                                  label: Text('Termurah', style: TextStyle(color: 'Termurah' == _sort ? Colors.white : Colors.black),),
+                                                  label: Text('Termurah', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, color: 'Termurah' == _sort ? Colors.white : Colors.black),),
                                                 ),
                                               ),
                                               Padding(
@@ -329,7 +344,7 @@ class _KatalogState extends State<Katalog> {
                                                     } 
                                                     getBuku();
                                                   },
-                                                  label: Text('Termahal', style: TextStyle(color: 'Termahal' == _sort ? Colors.white : Colors.black),),
+                                                  label: Text('Termahal', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, color: 'Termahal' == _sort ? Colors.white : Colors.black),),
                                                 ),
                                               ),
                                             ],
@@ -337,7 +352,7 @@ class _KatalogState extends State<Katalog> {
                                           const SizedBox(height: 25),
                                           Row(
                                             children: [
-                                              const Text('Genre:', style: TextStyle(fontSize: 18),),
+                                              const Text('Genre:', style: TextStyle(fontSize: 18, fontFamily: 'SourceSans', letterSpacing: 0.5),),
                                               const Spacer(),
                                               if(_showGenre == 5) GestureDetector(onTap: () => setState(() {_showGenre = _genreList.length;}), child: const Text('Tampilkan semua?', style: TextStyle(color: Colors.blue),))
                                               else GestureDetector(onTap: () => setState(() {_showGenre = 5;}), child: const Text('Sembunyikan', style: TextStyle(color: Colors.blue),),)
@@ -371,19 +386,19 @@ class _KatalogState extends State<Katalog> {
                                                     }
                                                     getBuku();
                                                   },
-                                                  label: Text('${genre['Genre']} (${genre['Total']})', style: TextStyle(color: genre['Genre'] == _genre ? Colors.white : Colors.black),),
+                                                  label: Text('${genre['Genre']} (${genre['Total']})', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, color: genre['Genre'] == _genre ? Colors.white : Colors.black),),
                                                 ),
                                               ),
                                             ],
                                           ),
                                           const SizedBox(height: 25),
-                                          const Text('Harga: ', style: TextStyle(fontSize: 18),),
+                                          const Text('Harga: ', style: TextStyle(fontSize: 18, fontFamily: 'SourceSans', letterSpacing: 0.5),),
                                           const SizedBox(height: 15,),
                                           Row(
                                             children: [
                                               Expanded(
                                                 flex: 1,
-                                                child: Align(alignment: Alignment.centerRight, child: Text('Rp ${idr.format(_rangeHarga.start.round())}'))
+                                                child: Align(alignment: Alignment.centerRight, child: Text('Rp ${idr.format(_rangeHarga.start.round())}', style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),))
                                               ),
                                               RangeSlider( 
                                                 values: _rangeHarga,
@@ -412,12 +427,12 @@ class _KatalogState extends State<Katalog> {
                                               ),
                                               Expanded(
                                                 flex: 1,
-                                                child: Text('Rp ${idr.format(_rangeHarga.end.round())}')
+                                                child: Text('Rp ${idr.format(_rangeHarga.end.round())}', style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),)
                                               ),
                                             ],
                                           ),
                                           const SizedBox(height: 25,),
-                                          const Text('Stok Habis:', style: TextStyle(fontSize: 18),),
+                                          const Text('Stok Habis:', style: TextStyle(fontSize: 18, fontFamily: 'SourceSans', letterSpacing: 0.5),),
                                           const SizedBox(height: 15,),
                                           Wrap(
                                             spacing: 8,
@@ -441,7 +456,7 @@ class _KatalogState extends State<Katalog> {
                                                   });
                                                   getBuku();
                                                 },
-                                                label: Text('Sembunyikan', style: TextStyle(color: _hideEmpty ? Colors.white : Colors.black),),
+                                                label: Text('Sembunyikan', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, color: _hideEmpty ? Colors.white : Colors.black),),
                                               )
                                             ],
                                           )
@@ -523,23 +538,23 @@ class _KatalogState extends State<Katalog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(buku['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22, overflow: TextOverflow.ellipsis), maxLines: 1,),
+                                  Text(buku['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22, overflow: TextOverflow.ellipsis, fontFamily: 'SourceSans', letterSpacing: 0.7), maxLines: 1,),
                                   const SizedBox(height: 5,),
-                                  Text('by ${buku['Penulis']}', style: const TextStyle(fontSize: 14), overflow: TextOverflow.ellipsis, maxLines: 1,),
+                                  Text('by ${buku['Penulis']}', style: const TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5), overflow: TextOverflow.ellipsis, maxLines: 1,),
                                   const SizedBox(height: 8,),
                                   Row(
                                     children: [
                                       const Icon(Icons.category, size: 14,),
                                       const SizedBox(width: 3,),
-                                      Text(buku['Genre']['Genre']),
+                                      Text(buku['Genre']['Genre'], style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),),
                                       const SizedBox(width: 15,),
                                       FaIcon(FontAwesomeIcons.box, size: 14, color: buku['Stok'] == 0 ? Colors.red : Colors.black),
                                       const SizedBox(width: 3,),
-                                      Text('${buku['Stok']}', style: TextStyle(color: buku['Stok'] == 0 ? Colors.red : Colors.black),)
+                                      Text('${buku['Stok']}', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5, color: buku['Stok'] == 0 ? Colors.red : Colors.black),)
                                     ],
                                   ),
                                   const Spacer(),
-                                  Align(alignment: Alignment.bottomRight, child: Text('Rp ${idr.format(buku['Harga'])}', style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20),))
+                                  Align(alignment: Alignment.bottomRight, child: Text('Rp ${idr.format(buku['Harga'])}', style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.7),))
                                 ],
                               ),
                             ),

@@ -49,9 +49,9 @@ class _HomeBannerState extends State<HomeBanner> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                      child: Text('BukuBook', style: TextStyle(color: Colors.black54, fontSize: 15)),
+                      child: Text('BukuBook', style: TextStyle(color: Colors.black54, fontSize: 15, fontFamily: 'OpenSans', letterSpacing: 0.7, height: 1.1, wordSpacing: 1.1)),
                     ),
-                    Text('${item["Judul"]}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                    Text('${item["Judul"]}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 1, height: 1.1, wordSpacing: 1.2)),
                   ],
                 ),
               ),

@@ -58,7 +58,7 @@ class _DetailOrderState extends State<DetailOrder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_data['Invoice']),
+        title: Text(_data['Invoice'], style: TextStyle(fontFamily: 'SourceSans', letterSpacing: 0.5),),
       ),
       body: ListView(
         shrinkWrap: true,
@@ -73,7 +73,7 @@ class _DetailOrderState extends State<DetailOrder> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Informasi Order', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text('Informasi Order', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
                     const SizedBox(height: 15,),
                     _loading
                     ? SkeletonLine(
@@ -84,11 +84,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Invoice', style: TextStyle(fontSize: 16),)
+                          child: Text('Invoice', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Invoice']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Invoice']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -102,11 +102,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Tanggal', style: TextStyle(fontSize: 16),)
+                          child: Text('Tanggal', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Tanggal']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Tanggal']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -120,11 +120,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Total', style: TextStyle(fontSize: 16),)
+                          child: Text('Total', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': Rp ${idr.format(_data['Total'])}', style: TextStyle(fontSize: 16),),
+                          child: Text(': Rp ${idr.format(_data['Total'])}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -143,7 +143,7 @@ class _DetailOrderState extends State<DetailOrder> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Informasi Pembeli', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text('Informasi Pembeli', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
                     const SizedBox(height: 15,),
                     _loading
                     ? SkeletonLine(
@@ -154,11 +154,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Nama', style: TextStyle(fontSize: 16),)
+                          child: Text('Nama', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Nama']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Nama']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -172,11 +172,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Telp', style: TextStyle(fontSize: 16),)
+                          child: Text('Telp', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['NoTelp']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['NoTelp']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -190,11 +190,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Email', style: TextStyle(fontSize: 16),)
+                          child: Text('Email', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Email']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Email']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -213,7 +213,7 @@ class _DetailOrderState extends State<DetailOrder> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Alamat Tujuan', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text('Alamat Tujuan', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
                     const SizedBox(height: 15,),
                     _loading
                     ? SkeletonLine(
@@ -224,11 +224,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Provinsi', style: TextStyle(fontSize: 16),)
+                          child: Text('Provinsi', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Provinsi']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Provinsi']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -242,11 +242,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Kota', style: TextStyle(fontSize: 16),)
+                          child: Text('Kota', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Kota']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Kota']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -260,11 +260,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Jalan', style: TextStyle(fontSize: 16),)
+                          child: Text('Jalan', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Alamat']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Alamat']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -278,11 +278,11 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         const Expanded(
                           flex: 1,
-                          child: Text('Kodepos', style: TextStyle(fontSize: 16),)
+                          child: Text('Kodepos', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(': ${_data['Kodepos']}', style: TextStyle(fontSize: 16),),
+                          child: Text(': ${_data['Kodepos']}', style: TextStyle(fontSize: 14, fontFamily: 'OpenSans', letterSpacing: 0.5),),
                         )
                       ],
                     ),
@@ -301,22 +301,22 @@ class _DetailOrderState extends State<DetailOrder> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Detail Pesanan', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text('Detail Pesanan', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
                     const SizedBox(height: 20,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Expanded(
                           flex: 5,
-                          child: Text('Judul Buku', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('Judul Buku', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text('Jumlah', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('Jumlah', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 4,
-                          child: Text('Total', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('Total', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         )
                       ],
                     ),
@@ -332,15 +332,15 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text(detail['Buku']['Judul'], style: TextStyle(fontSize: 16),)
+                          child: Text(detail['Buku']['Judul'], style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text('${detail['Jumlah']}x', style: TextStyle(fontSize: 16),)
+                          child: Text('${detail['Jumlah']}x', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         ),
                         Expanded(
                           flex: 4,
-                          child: Text('Rp ${idr.format(detail['Subtotal'])}', style: TextStyle(fontSize: 16),)
+                          child: Text('Rp ${idr.format(detail['Subtotal'])}', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         )
                       ],
                     ),
@@ -356,12 +356,12 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text('Subtotal', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('Subtotal', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         ),
                         const Spacer(flex: 3,),
                         Expanded(
                           flex: 4,
-                          child: Text('Rp ${idr.format(_data['Subtotal'])}', style: TextStyle(fontSize: 16),)
+                          child: Text('Rp ${idr.format(_data['Subtotal'])}', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         )
                       ],
                     ),
@@ -371,12 +371,12 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text('Potongan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('Potongan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         ),
                         const Spacer(flex: 3,),
                         Expanded(
                           flex: 4,
-                          child: Text('Rp -${idr.format(_data['Potongan'])}', style: TextStyle(fontSize: 16),)
+                          child: Text('Rp -${idr.format(_data['Potongan'])}', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         )
                       ],
                     ) : SizedBox(),
@@ -392,12 +392,12 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text('Ongkir', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('Ongkir', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         ),
                         const Spacer(flex: 3,),
                         Expanded(
                           flex: 4,
-                          child: Text('Rp ${idr.format(_data['Ongkir'])}', style: TextStyle(fontSize: 16),)
+                          child: Text('Rp ${idr.format(_data['Ongkir'])}', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         )
                       ],
                     ),
@@ -413,12 +413,12 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text('PPN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('PPN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         ),
                         const Spacer(flex: 3,),
                         Expanded(
                           flex: 4,
-                          child: Text('Rp ${idr.format(_data['PPN'])}', style: TextStyle(fontSize: 16),)
+                          child: Text('Rp ${idr.format(_data['PPN'])}', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         )
                       ],
                     ),
@@ -434,12 +434,12 @@ class _DetailOrderState extends State<DetailOrder> {
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text('Total', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
+                          child: Text('Total', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                         ),
                         const Spacer(flex: 3,),
                         Expanded(
                           flex: 4,
-                          child: Text('Rp ${idr.format(_data['Total'])}', style: TextStyle(fontSize: 16),)
+                          child: Text('Rp ${idr.format(_data['Total'])}', style: TextStyle(fontSize: 16, fontFamily: 'OpenSans', letterSpacing: 0.5),)
                         )
                       ],
                     ),

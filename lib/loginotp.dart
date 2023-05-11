@@ -67,11 +67,11 @@ class _LoginOtpState extends State<LoginOtp> {
                 children: [
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 16),
-                    child: Text('Verifikasi OTP', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+                    child: Text('Verifikasi OTP', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
-                    child: Text('Kode OTP telah kami kirim kan ke nomor ${widget.telp}'),
+                    child: Text('Kode OTP telah kami kirim kan ke nomor ${widget.telp}', style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
@@ -85,13 +85,13 @@ class _LoginOtpState extends State<LoginOtp> {
                           if(response.data['status'] == 200) {
                             if(response.data['data']) {
                               box.write('accesstoken', response.data['accesstoken']),
-                              pushNewScreen(context, screen: const BottomNavbar())
+                              Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false)
                             } else {
                               pushNewScreen(context, screen: FillData(telp: widget.telp))
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(response.data['message']))
+                              SnackBar(content: Text(response.data['message'], style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5)))
                             )
                           },
                         });
@@ -104,6 +104,7 @@ class _LoginOtpState extends State<LoginOtp> {
                       alignment: Alignment.bottomRight,
                       child: RichText(
                         text: TextSpan(
+                          style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),
                           children: [
                             const TextSpan(
                               text: 'Belum menerima kode OTP? ',

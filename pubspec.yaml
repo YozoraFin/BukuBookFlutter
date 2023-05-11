@@ -91,17 +91,65 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans/OpenSans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/OpenSans/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSans/OpenSans-SemiBold.ttf
+          weight: 600
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+          weight: 700
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+          weight: 700
+    - family: Oswald
+      fonts:
+        - asset: assets/fonts/Oswald/Oswald-Regular.ttf
+        - asset: assets/fonts/Oswald/Oswald-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Oswald/Oswald-Light.ttf
+          weight: 300
+    - family: 'Raleway'
+      fonts:
+      - asset: assets/fonts/Raleway/Raleway-Regular.ttf
+      - asset: assets/fonts/Raleway/Raleway-Italic.ttf
+        style: italic
+      - asset: assets/fonts/Raleway/Raleway-Bold.ttf
+        weight: 700
+    - family: 'SourceSans'
+      fonts:
+      - asset: assets/fonts/SourceSans/SourceSansPro-Regular.ttf
+      - asset: assets/fonts/SourceSans/SourceSansPro-Italic.ttf
+        style: italic
+      - asset: assets/fonts/SourceSans/SourceSansPro-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/SourceSans/SourceSansPro-SemiBold.ttf
+        weight: 600
+    - family: Baskerville
+      fonts:
+      - asset: assets/fonts/Baskerville/LibreBaskerville-Regular.ttf
+      - asset: assets/fonts/Baskerville/LibreBaskerville-Italic.ttf
+        style: italic
+      - asset: assets/fonts/Baskerville/LibreBaskerville-Bold.ttf
+        weight: 700
+    # - family: Trajan Pro
+    #   fonts:
+    #     - asset: fonts/TrajanPro.ttf
+    #     - asset: fonts/TrajanPro_Bold.ttf
+    #       weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

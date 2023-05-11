@@ -90,10 +90,10 @@ class _ProfilState extends State<Profil> {
               Navigator.pop(context);
             });
           }, 
-          child: const Text('Simpan')
+          child: const Text('Simpan', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),)
         ),
         appBar: AppBar(
-          title: const Text('Profil'),
+          title: const Text('Profil', style: TextStyle(fontFamily: 'SourceSans', letterSpacing: 0.5),),
         ),
         body: SmartRefresher(
           controller: _refreshController,
@@ -131,7 +131,7 @@ class _ProfilState extends State<Profil> {
                                     children: [
                                       Row(
                                         children: [
-                                          const Text('Foto Profil', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                                          const Text('Foto Profil', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.5),),
                                           const Spacer(),
                                           IconButton(
                                             alignment: Alignment.centerRight,
@@ -158,7 +158,7 @@ class _ProfilState extends State<Profil> {
                                                     shape: BoxShape.circle,
                                                     border: Border.all(
                                                       color: Colors.black.withOpacity(0.5),
-                                                      width: 1.5
+                                                      width: 1
                                                     ),
                                                     color: Colors.blue,
                                                   ),
@@ -168,7 +168,7 @@ class _ProfilState extends State<Profil> {
                                                 ),
                                               ),
                                               const SizedBox(height: 10,),
-                                              const Text('Galeri', style: TextStyle(fontSize: 16),)
+                                              const Text('Galeri', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                                             ],
                                           ),
                                           const SizedBox(width: 20,),
@@ -184,7 +184,7 @@ class _ProfilState extends State<Profil> {
                                                     shape: BoxShape.circle,
                                                     border: Border.all(
                                                       color: Colors.black.withOpacity(0.5),
-                                                      width: 1.5
+                                                      width: 1
                                                     ),
                                                     color: Colors.blue,
                                                   ),
@@ -194,7 +194,7 @@ class _ProfilState extends State<Profil> {
                                                 ),
                                               ),
                                               const SizedBox(height: 10,),
-                                              const Text('Kamera', style: TextStyle(fontSize: 16),)
+                                              const Text('Kamera', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                                             ],
                                           ),
                                           const SizedBox(width: 20,),
@@ -210,7 +210,7 @@ class _ProfilState extends State<Profil> {
                                                     shape: BoxShape.circle,
                                                     border: Border.all(
                                                       color: Colors.black.withOpacity(0.5),
-                                                      width: 1.5
+                                                      width: 1
                                                     ),
                                                     color: Colors.blue,
                                                   ),
@@ -220,7 +220,7 @@ class _ProfilState extends State<Profil> {
                                                 ),
                                               ),
                                               const SizedBox(height: 10,),
-                                              const Text('Hapus', style: TextStyle(fontSize: 16),)
+                                              const Text('Hapus', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
                                             ],
                                           ),
                                         ],

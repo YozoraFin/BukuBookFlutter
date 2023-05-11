@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:login_page/constants.dart';
 import 'package:login_page/couponlist.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -19,6 +20,7 @@ class _HomeCouponState extends State<HomeCoupon> {
     'Teaser': '',
     'SrcGambar': ''
   };
+  final box = GetStorage();
 
   @override
   void initState() {
@@ -27,7 +29,7 @@ class _HomeCouponState extends State<HomeCoupon> {
   }
 
   getKupon() {
-    Dio().get('${Constants.baseUrl}/kupon').then((value) {
+    Dio().post('${Constants.baseUrl}/kupon/get', data: {'AksesToken': box.read('accesstoken')}).then((value) {
       setState(() {
         _coupon = value.data['hData'];
       });
@@ -50,11 +52,14 @@ class _HomeCouponState extends State<HomeCoupon> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(_coupon['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20), textAlign: TextAlign.center,),
+                Text(_coupon['Judul'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'Baskerville', letterSpacing: 0.7, wordSpacing: 1.1, height: 1.2), textAlign: TextAlign.center,),
                 const SizedBox(height: 10,),
-                Text(_coupon['Kode'], style: const TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, fontSize: 15), textAlign: TextAlign.center,),
+                Text(_coupon['Kode'], style: const TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, fontSize: 15, fontFamily: 'SourceSans'), textAlign: TextAlign.center,),
                 const SizedBox(height: 10,),
-                Text(_coupon['Teaser'], style: const TextStyle(color: Color(0xFF777777)), textAlign: TextAlign.center,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(_coupon['Teaser'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5), textAlign: TextAlign.center,),
+                ),
                 const SizedBox(height: 10,),
                 ElevatedButton(
                   onPressed: () {
@@ -67,7 +72,7 @@ class _HomeCouponState extends State<HomeCoupon> {
                       )
                     )
                   ),
-                  child: const Text('Detail')
+                  child: const Text('Detail', style: TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5),)
                 )
               ],
             ),
