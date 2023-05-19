@@ -119,8 +119,8 @@ class KatalogState extends State<Katalog> {
         _rangeHarga = RangeValues(min, max);
         _maxHarga = value.data['max']/1.0;
       });
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
 
   clearFilter(setter) {

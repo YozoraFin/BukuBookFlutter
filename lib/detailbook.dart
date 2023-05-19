@@ -55,8 +55,8 @@ class _DetailBookState extends State<DetailBook> {
         _jumlah = 1;
         _loading = false;
       });
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
 
   @override

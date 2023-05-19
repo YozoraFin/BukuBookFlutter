@@ -91,8 +91,8 @@ class CheckoutState extends State<CheckOut> {
         _ppn = value.data['subtotal']*11~/100.toInt();
         _total = value.data['subtotal'];
       });
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
   
   setOngkir(int harga) {

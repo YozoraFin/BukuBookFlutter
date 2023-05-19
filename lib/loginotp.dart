@@ -84,7 +84,12 @@ class _LoginOtpState extends State<LoginOtp> {
                         .then((response) => {
                           if(response.data['status'] == 200) {
                             if(response.data['data']) {
+                            print(response.data),
                               box.write('accesstoken', response.data['accesstoken']),
+                              box.write('namalengkap', response.data['namalengkap']),
+                              box.write('namapanggilan', response.data['namapanggilan']),
+                              box.write('alamat', response.data['alamat']),
+                              box.write('email', response.data['email']),
                               Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false)
                             } else {
                               pushNewScreen(context, screen: FillData(telp: widget.telp))

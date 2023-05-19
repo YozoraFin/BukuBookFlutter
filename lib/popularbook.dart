@@ -127,60 +127,52 @@ class _PopularBookState extends State<PopularBook> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 0.3
-                              ),
                               borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
                                   blurRadius: 1,
-                                  spreadRadius: 1,
-                                  offset: const Offset(0, 2)
+                                  spreadRadius: 2,
+                                  offset: const Offset(0, 1)
                                 )
                               ]
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 150,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            width: 1,
-                                            color: Colors.grey
-                                          ),
-                                          borderRadius: BorderRadius.circular(13),
+                            child: SizedBox(
+                              width: 150,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Center(
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+                                      child: CachedNetworkImage(
+                                        imageUrl: e['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
+                                        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                          child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                                         ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(13),
-                                          child: CachedNetworkImage(
-                                            imageUrl: e['Sampul'][0]['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                                            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                              child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                                            ),
-                                            errorWidget: (context, url, error) => const Icon(Icons.error),
-                                            width: 150,
-                                            height: 200,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      )
+                                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                                        width: 150,
+                                        height: 200,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  ),
+                                  const SizedBox(height: 10,),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Column(
+                                      children: [
+                                        Text(e['Judul'], style: const TextStyle(fontSize: 15, fontFamily: 'OpenSans', letterSpacing: 0.5), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
+                                        const SizedBox(height: 5,),
+                                        Text('By ${e['Penulis']}', style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF384AEB), fontFamily: 'OpenSans', fontSize: 13, letterSpacing: 0.5), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
+                                        const SizedBox(height: 5,),
+                                        Text('Rp ${idr.format(e["Harga"])}', style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5), textAlign: TextAlign.center,),     
+                                      ],
                                     ),
-                                    const SizedBox(height: 10,),
-                                    Text(e['Judul'], style: const TextStyle(fontSize: 15, fontFamily: 'OpenSans', letterSpacing: 0.5), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
-                                    const SizedBox(height: 5,),
-                                    Text('By ${e['Penulis']}', style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF384AEB), fontFamily: 'OpenSans', fontSize: 13, letterSpacing: 0.5), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
-                                    const SizedBox(height: 5,),
-                                    Text('Rp ${idr.format(e["Harga"])}', style: const TextStyle(fontFamily: 'OpenSans', letterSpacing: 0.5), textAlign: TextAlign.center,)     
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 5,),    
+                                ],
                               ),
                             ),
                           ),

@@ -22,6 +22,8 @@ class _CouponListState extends State<CouponList> with SingleTickerProviderStateM
   List _couponData = [];
   List _couponPrivateList = [];
   List _couponPrivateData = [];
+  bool _toggleSrc = false;
+  double _searchSize = 60;
   // Kalo uda belajar cara bikin animasi baru dilanjut oke!
   // bool _toggleSrc = false;
   bool _loading = true;
@@ -54,8 +56,8 @@ class _CouponListState extends State<CouponList> with SingleTickerProviderStateM
         _couponPrivateData = value.data['data'].where((kup) => kup['Akses'] == true ).toList();
         _loading = false;
       });
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
 
   getView(data) {
@@ -104,6 +106,7 @@ class _CouponListState extends State<CouponList> with SingleTickerProviderStateM
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
+                          alignment: Alignment.topLeft,
                         )
                       ),
                     ),
@@ -170,9 +173,10 @@ class _CouponListState extends State<CouponList> with SingleTickerProviderStateM
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
         // Kalo uda belajar cara bikin animasi baru dilanjut oke!
-        // setState(() {
-        //   _toggleSrc = false;
-        // });
+        setState(() {
+          _toggleSrc = false;
+          _searchSize = 60;
+        });
       },
       child: Scaffold(
         appBar: AppBar(
@@ -186,46 +190,83 @@ class _CouponListState extends State<CouponList> with SingleTickerProviderStateM
             ]
           ),
           // Kalo uda belajar cara bikin animasi baru dilanjut oke!
-          // actions: [
-          //     Row(
-          //       children: [
-          //         _toggleSrc 
-          //         ? Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: SizedBox(
-          //             width: 150,
-          //             height: 35,
-          //             child: TextField(
-          //               controller: keywordController,
-          //               decoration: const InputDecoration(
-          //                 hintText: 'Cari',
-          //                 filled: true,
-          //                 fillColor: Colors.white,
-          //                 border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-          //                 contentPadding: EdgeInsets.symmetric(horizontal: 10)
-          //               ),
-          //               onChanged: (text) {
-          //                 setState(() {
-          //                   _couponList = _couponData.where((element) => element['Judul'].toLowerCase().contains(text) || element['Kode'].toLowerCase().contains(text)).toList();
-          //                 });
-          //               },
-          //             ),
-          //           ),
-          //         )
-          //         : Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: IconButton(
-          //             onPressed: () {
-          //               setState(() {
-          //                 _toggleSrc = true;
-          //               });
-          //             },
-          //             icon: Icon(Icons.search),
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          // ],
+          actions: [
+              Row(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    height: 35,
+                    width: _searchSize,
+                    padding: const EdgeInsets.only(right: 16),
+                    child: TextField(
+                      controller: keywordController,
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            if(!_toggleSrc) {
+                              setState(() {
+                                _toggleSrc = true;
+                                _searchSize = 170;
+                              });
+                            }
+                          },
+                          icon: const Icon(Icons.search),
+                        ),
+                        hintText: 'Cari',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                        focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.black), borderRadius: BorderRadius.all(Radius.circular(15)))
+                      ),
+                      onChanged: (text) {
+                        setState(() {
+                          _couponList = _couponData.where((element) => element['Judul'].toLowerCase().contains(text) || element['Kode'].toLowerCase().contains(text)).toList();
+                        });
+                      },
+                    ),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: AnimatedContainer(
+                  //     duration: const Duration(milliseconds: 500),
+                  //     width: _searchSize,
+                  //     height: 35,
+                  //     child: _toggleSrc
+                  //     ? TextField(
+                  //       controller: keywordController,
+                  //       decoration: const InputDecoration(
+                  //         hintText: 'Cari',
+                  //         filled: true,
+                  //         fillColor: Colors.white,
+                  //         border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                  //         contentPadding: EdgeInsets.symmetric(horizontal: 10)
+                  //       ),
+                  //       onChanged: (text) {
+                  //         setState(() {
+                  //           _couponList = _couponData.where((element) => element['Judul'].toLowerCase().contains(text) || element['Kode'].toLowerCase().contains(text)).toList();
+                  //         });
+                  //       },
+                  //     )
+                  //     : SizedBox()
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(right: 8.0),
+                  //   child: IconButton(
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         _toggleSrc = true;
+                  //         _searchSize = 150;
+                  //       });
+                  //     },
+                  //     icon: const Icon(Icons.search),
+                  //   ),
+                  // )
+                ],
+              ),
+          ],
         ),
         body: SmartRefresher(
           controller: _refreshController,

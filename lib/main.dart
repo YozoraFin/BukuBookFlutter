@@ -1,3 +1,4 @@
+import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -32,19 +33,32 @@ class _LoadPageState extends State<LoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: check(),
-      builder: (context, AsyncSnapshot<bool> snapshot) {
-        if(snapshot.hasData) {
-          if(snapshot.data ?? false) {
-            return const BottomNavbar(initial: 0,);
-          } else {
-            box.erase();
-            return const Login();
-          }
-        }
-        return const SplashScreenBukuBook();
-      },
+    return Scaffold(
+      body: ConnectivityWidget(
+        showOfflineBanner: false,
+        builder: (context, isOnline) => FutureBuilder(
+          future: check(),
+          builder: (context, AsyncSnapshot<bool> snapshot) {
+            if(!isOnline) {
+              if(box.read('namalengkap') != null) {
+                return const BottomNavbar();
+              } else {
+                return const Login();
+              }
+            } else {
+              if(snapshot.hasData) {
+                if(snapshot.data ?? false) {
+                  return const BottomNavbar(initial: 0,);
+                } else {
+                  box.erase();
+                  return const Login();
+                }
+              }
+              return const SplashScreenBukuBook();
+            }
+          },
+        ),
+      ),
     );
   }
 }

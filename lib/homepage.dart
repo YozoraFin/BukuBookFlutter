@@ -188,7 +188,6 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 20, width: double.infinity),
               _loadingBanner 
               ? const SkeletonLine(
                 style: SkeletonLineStyle(
@@ -197,7 +196,8 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.center
                 ),
               )
-              : HomeBanner(bannerData: _banner),const SizedBox(height: 50,),
+              : HomeBanner(bannerData: _banner),
+              const SizedBox(height: 50,),
               PopularBook(popularBook: _popularBook, loading: _loadingPopular,),
               _loadingCoupon
               ? const SkeletonLine(

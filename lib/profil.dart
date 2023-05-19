@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -45,8 +46,8 @@ class _ProfilState extends State<Profil> {
         _alamatController.text = value.data['data']['Alamat'];
         _profileUrl = value.data['data']['Profil'];
       });
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
 
   imageChange(ImageSource src) async {
@@ -95,179 +96,181 @@ class _ProfilState extends State<Profil> {
         appBar: AppBar(
           title: const Text('Profil', style: TextStyle(fontFamily: 'SourceSans', letterSpacing: 0.5),),
         ),
-        body: SmartRefresher(
-          controller: _refreshController,
-          onRefresh:() {
-            getData();
-            setState(() {
-              _profile = null;
-              _deleteProfil = false;
-            });
-          },
-          child: Column(
-            children: [
-              const SizedBox(height: 16,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context, 
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical( 
-                              top: Radius.circular(25.0),
+        body: ConnectivityWidget(
+          builder: (context, isOnline) => SmartRefresher(
+            controller: _refreshController,
+            onRefresh:() {
+              getData();
+              setState(() {
+                _profile = null;
+                _deleteProfil = false;
+              });
+            },
+            child: Column(
+              children: [
+                const SizedBox(height: 16,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context, 
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical( 
+                                top: Radius.circular(25.0),
+                              ),
                             ),
-                          ),
-                          builder: (BuildContext context) {
-                            return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-                              return SizedBox(
-                                height: 170,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const Text('Foto Profil', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.5),),
-                                          const Spacer(),
-                                          IconButton(
-                                            alignment: Alignment.centerRight,
-                                            padding: EdgeInsets.zero,
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            }, 
-                                            icon: const Icon(Icons.clear)
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(height: 10,),
-                                      Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  Navigator.pop(context);
-                                                  imageChange(ImageSource.gallery);
-                                                },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                      color: Colors.black.withOpacity(0.5),
-                                                      width: 1
+                            builder: (BuildContext context) {
+                              return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                                return SizedBox(
+                                  height: 170,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Text('Foto Profil', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'SourceSans', letterSpacing: 0.5),),
+                                            const Spacer(),
+                                            IconButton(
+                                              alignment: Alignment.centerRight,
+                                              padding: EdgeInsets.zero,
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              }, 
+                                              icon: const Icon(Icons.clear)
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10,),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                    imageChange(ImageSource.gallery);
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: Colors.black.withOpacity(0.5),
+                                                        width: 1
+                                                      ),
+                                                      color: Colors.blue,
                                                     ),
-                                                    color: Colors.blue,
+                                                    width: 55,
+                                                    height: 55,
+                                                    child: const Center(child: FaIcon(FontAwesomeIcons.image, color: Colors.white,))
                                                   ),
-                                                  width: 55,
-                                                  height: 55,
-                                                  child: const Center(child: FaIcon(FontAwesomeIcons.image, color: Colors.white,))
                                                 ),
-                                              ),
-                                              const SizedBox(height: 10,),
-                                              const Text('Galeri', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
-                                            ],
-                                          ),
-                                          const SizedBox(width: 20,),
-                                          Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  Navigator.pop(context);
-                                                  imageChange(ImageSource.camera);
-                                                },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                      color: Colors.black.withOpacity(0.5),
-                                                      width: 1
+                                                const SizedBox(height: 10,),
+                                                const Text('Galeri', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
+                                              ],
+                                            ),
+                                            const SizedBox(width: 20,),
+                                            Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                    imageChange(ImageSource.camera);
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: Colors.black.withOpacity(0.5),
+                                                        width: 1
+                                                      ),
+                                                      color: Colors.blue,
                                                     ),
-                                                    color: Colors.blue,
+                                                    width: 55,
+                                                    height: 55,
+                                                    child: const Center(child: FaIcon(FontAwesomeIcons.camera, color: Colors.white,))
                                                   ),
-                                                  width: 55,
-                                                  height: 55,
-                                                  child: const Center(child: FaIcon(FontAwesomeIcons.camera, color: Colors.white,))
                                                 ),
-                                              ),
-                                              const SizedBox(height: 10,),
-                                              const Text('Kamera', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
-                                            ],
-                                          ),
-                                          const SizedBox(width: 20,),
-                                          Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  deleteImage();
-                                                  Navigator.pop(context); 
-                                                },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                      color: Colors.black.withOpacity(0.5),
-                                                      width: 1
+                                                const SizedBox(height: 10,),
+                                                const Text('Kamera', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
+                                              ],
+                                            ),
+                                            const SizedBox(width: 20,),
+                                            Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    deleteImage();
+                                                    Navigator.pop(context); 
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: Colors.black.withOpacity(0.5),
+                                                        width: 1
+                                                      ),
+                                                      color: Colors.blue,
                                                     ),
-                                                    color: Colors.blue,
+                                                    width: 55,
+                                                    height: 55,
+                                                    child: const Center(child: FaIcon(FontAwesomeIcons.trash, color: Colors.white,))
                                                   ),
-                                                  width: 55,
-                                                  height: 55,
-                                                  child: const Center(child: FaIcon(FontAwesomeIcons.trash, color: Colors.white,))
                                                 ),
-                                              ),
-                                              const SizedBox(height: 10,),
-                                              const Text('Hapus', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                                const SizedBox(height: 10,),
+                                                const Text('Hapus', style: TextStyle(fontSize: 16, fontFamily: 'SourceSans', letterSpacing: 0.5),)
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                );
+                              });
+                            }
+                          );
+                        },
+                        child: ClipOval(
+                          child: Stack(
+                            children: [
+                              _profile != null
+                              ? Image.file(File(_profile!.path), fit: BoxFit.cover, width: 125, height: 125,)
+                              : CachedNetworkImage(
+                                imageUrl: _profileUrl == '' ? Constants.emptProfile : _profileUrl.replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
+                                progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                  child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
                                 ),
-                              );
-                            });
-                          }
-                        );
-                      },
-                      child: ClipOval(
-                        child: Stack(
-                          children: [
-                            _profile != null
-                            ? Image.file(File(_profile!.path), fit: BoxFit.cover, width: 125, height: 125,)
-                            : CachedNetworkImage(
-                              imageUrl: _profileUrl == '' ? Constants.emptProfile : _profileUrl.replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                              progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                              ),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
-                              width: 125,
-                              height: 125,
-                              fit: BoxFit.cover,
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              child: Container(
-                                color: Colors.black.withOpacity(0.6),
-                                height: 30,
+                                errorWidget: (context, url, error) => const Icon(Icons.error),
                                 width: 125,
-                                child: const Center(child: FaIcon(FontAwesomeIcons.camera, size: 18, color: Colors.white,)),
+                                height: 125,
+                                fit: BoxFit.cover,
                               ),
-                            )
-                          ]
+                              Positioned(
+                                bottom: 0,
+                                child: Container(
+                                  color: Colors.black.withOpacity(0.6),
+                                  height: 30,
+                                  width: 125,
+                                  child: const Center(child: FaIcon(FontAwesomeIcons.camera, size: 18, color: Colors.white,)),
+                                ),
+                              )
+                            ]
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ),
-              TextFormRoundBB(controller: _namaPanggilanController, placeholder: 'Nama Panggilan',),
-              TextFormRoundBB(controller: _namaLengkapController, placeholder: 'Nama Lengkap'),
-              TextFormRoundBB(controller: _alamatController, placeholder: 'Alamat', lines: null,),
-            ],
+                    ],
+                  )
+                ),
+                TextFormRoundBB(controller: _namaPanggilanController, placeholder: 'Nama Panggilan',),
+                TextFormRoundBB(controller: _namaLengkapController, placeholder: 'Nama Lengkap'),
+                TextFormRoundBB(controller: _alamatController, placeholder: 'Alamat', lines: null,),
+              ],
+            ),
           ),
         ),
       ),

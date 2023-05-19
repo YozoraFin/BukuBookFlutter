@@ -97,8 +97,8 @@ class _ArticleListState extends State<ArticleList> {
           _loading = false;
         });
       }
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
 
   getArticleByKategori(kategori) {
@@ -119,8 +119,8 @@ class _ArticleListState extends State<ArticleList> {
           _loading = false;
         });
       }
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
 
   @override
@@ -280,42 +280,48 @@ class _ArticleListState extends State<ArticleList> {
               ),
             )}).expand((padding) => [padding]).toList() : ({for(var artikel in _articleList) Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-              child: GestureDetector(
-                onTap: () {
-                  pushNewScreen(context, screen: ArticleDetail(id: artikel['id'] ?? ''), withNavBar: false);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
-                    Center(
-                      child: CachedNetworkImage(
-                        imageUrl: artikel['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
-                        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                          child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
-                        ),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                        width: double.infinity,
-                        height: 200,
-                        fit: BoxFit.cover,
-                      )
-                    ),
-                    const SizedBox(height: 10,),
-                    RichText(text: TextSpan(
-                      children: [
-                        TextSpan(text: 'By ${artikel["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5)),
-                        const WidgetSpan(child: Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                          child: Icon(Icons.comment, size: 15, color: Color(0xFF777777),),
-                        )),
-                        TextSpan(text: '${artikel["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
-                      ]
-                    )),
-                    const SizedBox(height: 10,),
-                    Text(artikel['Judul'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
-                    const SizedBox(height: 10,),
-                    Text(artikel['Teaser'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
-                  ],
+              child: Container(
+                decoration: const BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.black, width: 0.3))
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    pushNewScreen(context, screen: ArticleDetail(id: artikel['id'] ?? ''), withNavBar: false);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:  [
+                      Center(
+                        child: CachedNetworkImage(
+                          imageUrl: artikel['SrcGambar'].replaceAll('http://127.0.0.1:5000', Constants.baseUrl),
+                          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                            child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator(value: downloadProgress.progress),)
+                          ),
+                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                          width: double.infinity,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        )
+                      ),
+                      const SizedBox(height: 10,),
+                      RichText(text: TextSpan(
+                        children: [
+                          TextSpan(text: 'By ${artikel["Penulis"]} ', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5)),
+                          const WidgetSpan(child: Padding(
+                            padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
+                            child: Icon(Icons.comment, size: 15, color: Color(0xFF777777),),
+                          )),
+                          TextSpan(text: '${artikel["JumlahKomen"]} Komentar', style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5))
+                        ]
+                      )),
+                      const SizedBox(height: 10,),
+                      Text(artikel['Judul'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'SourceSans', letterSpacing: 0.7, wordSpacing: 1.1)),
+                      const SizedBox(height: 10,),
+                      Text(artikel['Teaser'], style: const TextStyle(color: Color(0xFF777777), fontFamily: 'OpenSans', letterSpacing: 0.5)),
+                      const SizedBox(height: 20,)
+                    ],
+                  ),
                 ),
               ),
             )}).expand((padding) => [padding]).toList(),

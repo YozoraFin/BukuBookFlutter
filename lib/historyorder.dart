@@ -74,8 +74,8 @@ class _HistoryOrderState extends State<HistoryOrder> {
         }
         _loading = false;
       });
-      _refreshController.refreshCompleted();
     });
+    _refreshController.refreshCompleted();
   }
 
   @override
